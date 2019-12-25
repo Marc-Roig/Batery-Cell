@@ -1,0 +1,17 @@
+TO DO
+- Create Summary of how to use FREERTOS queues and signals
+    http://web.ist.utl.pt/~ist11993/FRTOS-API/group___queue_management.html
+- Add global variable in case sequence fails in any point
+    - If this boolean is set to true, abort for loop
+
+TO TEST
+- Test start sequence workflow
+    - Test list of callbacks
+    - Test if sequence name is valid
+    - Test if message is sent to the queue
+    - Test if the message is received in Core 1
+    - Test if sequence is executed
+
+- Test start Experiment Signals
+    - From WebsocketInstrument.ino StartExperiment -> Test xQueueSend
+    -
