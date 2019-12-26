@@ -2,5 +2,6 @@
 #define WEBSOCKET_MESSAGES_H
 
 void handleWsStartSequenceMessage(const DynamicJsonDocument &doc, int verbose=0);
+void handleWsTransmitedMessage(const DynamicJsonDocument &doc);
 
 #endif

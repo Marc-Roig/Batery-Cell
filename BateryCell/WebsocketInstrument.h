@@ -10,8 +10,9 @@ public:
     void startExperiment(int content);
     void stopExperiment(int content);
     void startMeasurements(int content);
-    void storeDataFromExperiments(int content);
-    void storeDataFromMeasurements(int content);
+    void stopMeasurements(int content);
+    // void storeDataFromExperiments(int content);
+    // void storeDataFromMeasurements(int content);
     void endOfSequence(int content);
 
 };

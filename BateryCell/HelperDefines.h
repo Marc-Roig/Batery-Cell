@@ -18,7 +18,7 @@
 
 #define WS_START_EXPERIMENT WebsocketOperation::startExperiment 
 #define WS_START_MEASUREMENTS WebsocketOperation::startMeasurements
-#define WS_STORE_DATA_FROM_EXPERIMENTS WebsocketOperation::storeDataFromExperiments
-#define WS_STORE_DATA_FROM_MEASUREMENTS WebsocketOperation::storeDataFromMeasurements
+#define WS_STOP_EXPERIMENT WebsocketOperation::stopExperiment
+#define WS_STOP_MEASUREMENTS WebsocketOperation::stopMeasurements
 
 #endif

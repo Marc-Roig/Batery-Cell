@@ -22,15 +22,14 @@ public:
     // ESP32 to Server Operations //
 
     static Operation_t startExperiment;
+    static Operation_t stopExperiment;
     static Operation_t startMeasurements;
-    static Operation_t storeDataFromExperiments;
-    static Operation_t storeDataFromMeasurements;
+    static Operation_t stopMeasurements;
 
-    static void _startExperiment(InstrumentVariant& ws, int content);
-    static void _stopExperiment(InstrumentVariant& ws, int content);
-    static void _startMeasurements(InstrumentVariant& ws, int content);
-    static void _storeDataFromExperiments(InstrumentVariant& ws, int content);
-    static void _storeDataFromMeasurements(InstrumentVariant& ws, int content);
+    static void _startExperiment(InstrumentVariant& variant, int content);
+    static void _stopExperiment(InstrumentVariant& variant, int content);
+    static void _startMeasurements(InstrumentVariant& variant, int content);
+    static void _stopMeasurements(InstrumentVariant& variant, int content);
 
     // Build messages to send
     static void sequenceRequestResponse(const char response[30]); // Response from ESP32 to the requested sequence

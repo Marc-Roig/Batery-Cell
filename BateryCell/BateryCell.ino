@@ -32,6 +32,7 @@ void create_normal_sequence() {
 
     Sequence normSeq;
     normSeq.add("WebSocket", WS_START_EXPERIMENT);
+    normSeq.add("WebSocket", WS_STOP_EXPERIMENT);
 
     storeNewSequence(normSeq, "normal_operation");
 
@@ -68,17 +69,15 @@ void testWS() {
 void testCorrectSequenceName() {
     // correct sequence
     Serial.println("[TEST] Sequence start with valid name");
-    const char* start_sequence_msg = "{\"type\":\"sequence_start\",\"from\":\"server\",\"to\":\"microcontroller\",\"content\":{\"sequence\":\"clean_operation\",\"experiment_id\":\"aSEFasdWEs\"}}";
+    const char *start_sequence_msg = "{\"type\":\"sequence_start\",\"from\":\"server\",\"to\":\"microcontroller\",\"content\":{\"sequence\":\"clean_operation\",\"experiment_id\":\"aSEFasdWEs\"}}";
+    size_t length = strlen(start_sequence_msg) + 1;
     create_clean_sequence();
     uint8_t* msg_correct_sequence = charToUint8(start_sequence_msg, length);
     handleWsMessage(msg_correct_sequence, length, 1 /* verbose */);
     delete[] msg_correct_sequence;
 }
 
-void test() {
-    // Init FREERtos queues
-//    initQueues();
-
+void testReceiveStartSequence() {
 
     testCorrectSequenceName();
 
@@ -100,6 +99,14 @@ void test() {
         }
 
     }
+}
+
+void test() {
+    // Init FREERtos queues
+//    initQueues();
+
+
+    testReceiveStartSequence();
 
     // -- Test sending WS Message
     Serial.println("[TEST] Sequence WS start experiment");
