@@ -72,7 +72,7 @@ void Core0Main(void * pvParameters) {
                 WSMessage wsMessage;
 
                 if ( xQueueReceive( wsQueueExperiment, &(wsMessage), ( TickType_t ) 5) == pdPASS) {
-                    Serial.println("Received");
+                    Serial.println("[CORE 0 LOOP] Experiment message to send received from Core1 Queue");
                     buildWsExperiment(wsMessage.content);
                 }
 

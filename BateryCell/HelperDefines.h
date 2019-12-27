@@ -20,5 +20,8 @@
 #define WS_START_MEASUREMENTS WebsocketOperation::startMeasurements
 #define WS_STOP_EXPERIMENT WebsocketOperation::stopExperiment
 #define WS_STOP_MEASUREMENTS WebsocketOperation::stopMeasurements
+#define WS_END_OF_SEQUENCE WebsocketOperation::endOfSequence
+
+#define WS_DEBUG_END_OF_OPERATION WebsocketOperationTest::endOfOperation
 
 #endif

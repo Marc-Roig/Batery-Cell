@@ -12,10 +12,6 @@ QueueHandle_t wsReceiveCommandQueue;
 std::map<std::string, WSMessage> WS_CommandsToReceiveMap;
 std::map<std::string, WSMessage> WS_CommandsToSendMap;
 
-// @DONE: ADD QUEUE FOR START SEQUENCE   (C0 -> C1) @QUEUE PARAMS -> const char* seq_name
-//                      ABORT SEQUENCE   (C0 -> C1) @QUEUE PARAMS -> None -> Signal?
-//                      START EXPERIMENT (C1 -> C0) @QUEUE PARAMS -> const char* exp_name
-//                      STOP  EXPERIMENT (C1 -> C0) @QUEUE PARAMS -> const char* exp_name
 // OPERATIONS QUEUES
 QueueHandle_t wsQueueStartExperiment;
 QueueHandle_t wsQueueStartSequence;

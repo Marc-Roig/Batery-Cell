@@ -21,6 +21,7 @@
 #include "InstrumentsOperations.h"
 
 #include "WebsocketOperations.h"
+#include "WebsocketOperationsTest.h"
 #include "WebsocketMessages.h"
 
 // Sequence

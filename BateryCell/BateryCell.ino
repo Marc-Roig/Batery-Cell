@@ -31,9 +31,13 @@ void create_normal_sequence() {
 
 
     Sequence normSeq;
+    normSeq.add("WebSocket", WS_DEBUG_END_OF_OPERATION); // Simulate server ok response for the next element of seq.
     normSeq.add("WebSocket", WS_START_EXPERIMENT);
+    normSeq.add("WebSocket", WS_DEBUG_END_OF_OPERATION); // Simulate server ok response for the next element of seq.
     normSeq.add("WebSocket", WS_STOP_EXPERIMENT);
-
+    normSeq.add("WebSocket", WS_DEBUG_END_OF_OPERATION); // Simulate server ok response for the next element of seq.
+    normSeq.add("WebSocket", WS_STOP_EXPERIMENT);
+//    normSeq.add("WebSocket", WS_END_OF_SEQUENCE);
     storeNewSequence(normSeq, "normal_operation");
 
 }
@@ -117,6 +121,8 @@ void test() {
     // TODO: handleWsMessage(msg_start_experiment_ok, length, 1);
     sequence.executeAll();
     // Start thread?
+
+
 }
 
 void setup() {

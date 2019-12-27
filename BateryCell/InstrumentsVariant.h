@@ -48,7 +48,6 @@ public:
     InstrumentVariant& operator = (Revolver val);
     InstrumentVariant& operator = (MotorStirrer val);
     InstrumentVariant& operator = (WebsocketInstrument val);
-    
 };
 
 #endif

@@ -21,11 +21,12 @@ void WebsocketInstrument::startExperiment(int content) {
                                   pdFALSE, /* xWaitForAllBits -> Don't wait for multiple bits, either bit will do. */
                                   (TickType_t)portMAX_DELAY ); /* xTicksToWait -> Wait a maximum of 100ms for either bit to be set. */
 
-    Serial.println("Confirmation Received");
     // Experiment was finalized correctly
     // @TODO: What if experiment has failed??
     if (uxBits & END_OF_OPERATION_BIT_OK) {
-        Serial.print("Confirmation OK");
+        Serial.println("Confirmation Received OK");
+    } else {
+        Serial.println("Confirmation Received ERROR");
     }
 
 }
@@ -110,43 +111,12 @@ void  WebsocketInstrument::stopMeasurements(int content) {
 
 }
 
-
-// void WebsocketInstrument::storeDataFromExperiments(int content) {
-
-
-
-// }
-
-// void WebsocketInstrument::storeDataFromMeasurements(int content) {
-
-
-
-// }
-
 void WebsocketInstrument::endOfSequence(int content) {
 
-    WSMessage wsMessage;
+    // Set signal to notify sequence has ended
+    // Core 0 will send a ws message to notify the server
+    xEventGroupSetBits( wsSignal, END_OF_SEQUENCE_BIT);
 
-    // @TODO Check if end_of_sequence is in the documentation
-    // Copy strings, strncpy requires to pass the string length
-    strncpy(wsMessage.content, "end_of_sequence", 15);
-    strncpy(wsMessage.type, "0", 1);
-
-    // Request Core 0 to send WS message of stop measurements
-    while ( xQueueSend( wsQueueExperiment, ( void * ) &wsMessage, ( TickType_t ) portMAX_DELAY ) != pdPASS ) {}
-
-    // Wait until the confirmation
-    auto uxBits = xEventGroupWaitBits( wsSignal, /* xEventGroup -> The event group being tested.*/
-                                  END_OF_OPERATION_BIT_OK | END_OF_OPERATION_BIT_ERROR,
-                                  pdTRUE, /* xClearOnExit -> BITS should be cleared before returning. */
-                                  pdFALSE, /* xWaitForAllBits -> Don't wait for multiple bits, either bit will do. */
-                                  (TickType_t)portMAX_DELAY ); /* xTicksToWait -> Wait a maximum of 100ms for either bit to be set. */
-
-    // Measurements have stopped
-    // @TODO: What if experiment has failed??
-    if (uxBits & END_OF_OPERATION_BIT_OK) {
-
-    }
 
 
 }

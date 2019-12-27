@@ -1,8 +1,6 @@
 #ifndef WEBSOCKET_OPERATIONS_H
 #define WEBSOCKET_OPERATIONS_H
 
-// @TODO: Define WSMessage max_content_lenght max_type_lenght as global
-//        And use these variables wherever a strncpy is used
 struct WSMessage {
 
     char content[30] = {0};
@@ -25,16 +23,18 @@ public:
     static Operation_t stopExperiment;
     static Operation_t startMeasurements;
     static Operation_t stopMeasurements;
+    static Operation_t endOfSequence;
 
     static void _startExperiment(InstrumentVariant& variant, int content);
     static void _stopExperiment(InstrumentVariant& variant, int content);
     static void _startMeasurements(InstrumentVariant& variant, int content);
     static void _stopMeasurements(InstrumentVariant& variant, int content);
+    static void _endOfSequence(InstrumentVariant& variant, int content);
 
     // Build messages to send
     static void sequenceRequestResponse(const char response[30]); // Response from ESP32 to the requested sequence
     static void transmitMessageTo(const char operation[30]); // Transmit message to PC (startExperiment, Measurements, ...)
-    static void endOfSequence(); // Message Server the requested sequence has ended
+//    static void endOfSequence(); // Message Server the requested sequence has ended
     static void sequenceAbortResponse(const char response[30]); // Response from ESP32 to the requested sequence abort operation
 
     // Server to ESP32 Operations //

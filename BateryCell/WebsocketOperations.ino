@@ -7,6 +7,7 @@ Operation_t WebsocketOperation::startExperiment  { WebsocketOperation::_startExp
 Operation_t WebsocketOperation::stopExperiment   { WebsocketOperation::_stopExperiment  , " Stop Experiment"};
 Operation_t WebsocketOperation::startMeasurements { WebsocketOperation::_startMeasurements, " Start Measurements "};
 Operation_t WebsocketOperation::stopMeasurements { WebsocketOperation::_stopMeasurements, " Stop Measurements"};
+Operation_t WebsocketOperation::endOfSequence { WebsocketOperation::_endOfSequence, "End of Sequence"};
 
 
 // Send order to start experiment (and record necessary data)
@@ -15,10 +16,10 @@ void WebsocketOperation::_startExperiment(InstrumentVariant& variant, int conten
     // Check if variant is actually holding a Websocket type
     if (!variant.is<WebsocketInstrument>()) throw("INCORRECT VARIANT TYPE");
 
-    // Transform variant into a Valve variable
+    // Transform variant into a WebsocketInstrument variable
     WebsocketInstrument ws = variant.as_websocket;
 
-    // Open valve
+    // Start experiment
     ws.startExperiment(content);
 }
 
@@ -28,10 +29,10 @@ void WebsocketOperation::_stopExperiment(InstrumentVariant& variant, int content
     // Check if variant is actually holding a Websocket type
     if (!variant.is<WebsocketInstrument>()) throw("INCORRECT VARIANT TYPE");
 
-    // Transform variant into a Valve variable
+    // Transform variant into a WebsocketInstrument variable
     WebsocketInstrument ws = variant.as_websocket;
 
-    // Open valve
+    // Stop experiment
     ws.stopExperiment(content);
 
 }
@@ -42,10 +43,10 @@ void WebsocketOperation::_startMeasurements(InstrumentVariant& variant, int cont
     // Check if variant is actually holding a Websocket type
     if (!variant.is<WebsocketInstrument>()) throw("INCORRECT VARIANT TYPE");
 
-    // Transform variant into a Valve variable
+    // Transform variant into a WebsocketInstrument variable
     WebsocketInstrument ws = variant.as_websocket;
 
-    // Open valve
+    // Start measurements
     ws.startMeasurements(content);
 
 }
@@ -55,19 +56,24 @@ void WebsocketOperation::_stopMeasurements(InstrumentVariant& variant, int conte
     // Check if variant is actually holding a Websocket type
     if (!variant.is<WebsocketInstrument>()) throw("INCORRECT VARIANT TYPE");
 
-    // Transform variant into a Valve variable
+    // Transform variant into a WebsocketInstrument variable
     WebsocketInstrument ws = variant.as_websocket;
 
-    // Open valve
+    // Stop measurements
     ws.stopMeasurements(content);
 
 }
 
-// void WebsocketOperation::_storeDataFromExperiments(InstrumentVariant& ws, int content) {
-    
-// }
+void WebsocketOperation::_endOfSequence(InstrumentVariant& variant, int content) {
 
+    // Check if variant is actually holding a Websocket type
+    if (!variant.is<WebsocketInstrument>()) throw("INCORRECT VARIANT TYPE");
 
-// void WebsocketOperation::_storeDataFromMeasurements(InstrumentVariant& ws, int content) {
-    
-// }
+    // Transform variant into a Valve variable
+    WebsocketInstrument ws = variant.as_websocket;
+
+    // Finish sequence
+    ws.endOfSequence(content);
+
+}
+
