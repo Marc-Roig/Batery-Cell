@@ -59,12 +59,13 @@ void handleWsStartSequenceMessage(const DynamicJsonDocument &doc, int verbose) {
 
 void handleWsTransmitedMessage(const DynamicJsonDocument &doc) {
 
-    const char* operation_requested = doc["content"]["operation_requested"];
-    const char* status = doc["content"]["status"];
+    String operation_requested = doc["content"]["operation_requested"];
+    String status = doc["content"]["status"];
 
     // If a message to start experiment was send, we are
     // waiting for teh confirmation
-    if (operation_requested == "start_experiment") {
+    if (operation_requested == "start_experiment" || operation_requested == "start_measurements" ||
+        operation_requested == "stop_experiment" || operation_requested == "stop_measurements") {
         // Send signal to Core1
         if      (status == "ok")    xEventGroupSetBits( wsSignal, END_OF_OPERATION_BIT_OK);
         else if (status == "error") xEventGroupSetBits( wsSignal, END_OF_OPERATION_BIT_ERROR);

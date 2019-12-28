@@ -30,7 +30,7 @@ Please make sure to update tests as appropriate.
 ## Authors and acknowledgment
 
 - Andreu Bonet Navarro 
-- Carlos
+- Carlos Bertomeu
 - Marc Roig Campos
 
 ## License

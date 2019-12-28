@@ -35,9 +35,8 @@ void create_normal_sequence() {
     normSeq.add("WebSocket", WS_START_EXPERIMENT);
     normSeq.add("WebSocket", WS_DEBUG_END_OF_OPERATION); // Simulate server ok response for the next element of seq.
     normSeq.add("WebSocket", WS_STOP_EXPERIMENT);
-    normSeq.add("WebSocket", WS_DEBUG_END_OF_OPERATION); // Simulate server ok response for the next element of seq.
-    normSeq.add("WebSocket", WS_STOP_EXPERIMENT);
-//    normSeq.add("WebSocket", WS_END_OF_SEQUENCE);
+    normSeq.addDelay(1000); // Give time to process the last element of seq. before ending sequence
+    normSeq.add("WebSocket", WS_END_OF_SEQUENCE);
     storeNewSequence(normSeq, "normal_operation");
 
 }
@@ -106,9 +105,6 @@ void testReceiveStartSequence() {
 }
 
 void test() {
-    // Init FREERtos queues
-//    initQueues();
-
 
     testReceiveStartSequence();
 
@@ -117,10 +113,7 @@ void test() {
     create_normal_sequence();
     Sequence sequence = sequences["normal_operation"];
 
-    // Simulate server sending the signal of start_experiment ok
-    // TODO: handleWsMessage(msg_start_experiment_ok, length, 1);
     sequence.executeAll();
-    // Start thread?
 
 
 }

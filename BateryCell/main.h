@@ -4,6 +4,9 @@
 // Uncoment if you want to test code (WIFI / Websocket are mocked)
 #define TEST_FLAG
 
+
+#include "Credentials.h"
+
 // STD libraries
 #include <vector>
 #include <map>
@@ -11,7 +14,7 @@
 
 // Utils
 #include <ArduinoJson.h>
-
+#include <FirebaseESP32.h>
 
 // Instruments / Operations definitions
 #include "Instruments.h"
@@ -33,6 +36,7 @@
 #include "Core0.h"
 
 #include "ExperimentSequences.h"
+#include "BateryCellSequences.h"
 
 #include "Globals.h"
 

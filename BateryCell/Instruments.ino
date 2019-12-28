@@ -182,11 +182,11 @@ Pump::Pump(int _pinA, int _pinB) {
 
     // CW-CCW pin
     pinB = _pinB;
-    // pinMode(pinB, OUTPUT);
+//    pinMode(pinB, OUTPUT);
 
     // Init pins
     digitalWrite(pinA, LOW);
-    // digitalWrite(pinB, HIGH);
+//    digitalWrite(pinB, HIGH);
 
 }
 

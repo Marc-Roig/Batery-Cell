@@ -1,6 +1,9 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
+//Define Firebase Data object
+FirebaseData firebaseData;
+
 // SEQUENCES
 std::map<std::string, Sequence> sequences;
 
@@ -17,7 +20,6 @@ QueueHandle_t wsQueueStartExperiment;
 QueueHandle_t wsQueueStartSequence;
 QueueHandle_t wsQueueAbortSequence;
 QueueHandle_t wsQueueExperiment;
-
 
 // @DONE: ADD SIGNAL FOR NOTIFYING END OF OPERATION (C1 -> C0)
 //                                 END OF SEQUENCE  (C1 -> C0) 

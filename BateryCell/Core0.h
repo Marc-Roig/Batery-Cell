@@ -2,9 +2,6 @@
 
 #define CORE_0_H
 
-// #define WS_Server_ID "192.168.0.100"    // Custom Router
-// #define WS_Server_ID "192.168.0.108" // Tortosa
-// #define WS_Server_ID "192.168.1.129" // Tarragona
 #define WS_Server_ID "34.67.206.162"
 #define WS_Server_Port 3001
 #define WS_Server_Route "/?platform=microcontroller"
