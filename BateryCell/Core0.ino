@@ -12,18 +12,9 @@ TaskHandle_t hTh_Core0_main;
 
 bool WS_online = false;
 
-//const char ssid[] = "TP-LINK_E7F758";
-//const char pass[] = "55302760";
-
-// const char ssid[] = "TP-Link_5C96";
-// const char pass[] = "87716443";
-
-const char ssid[] = "MIWIFI_2G_Jr3p";
-const char pass[] = "svXjAHe6";
-
 void initCore0() {
 
-    WiFi_Multi.addAP(ssid, pass);
+    WiFi_Multi.addAP(WIFI_SSID, WIFI_PASSWORD);
     while (WiFi_Multi.run() != WL_CONNECTED) { // Wait for the Wi-Fi to connect
         delay(250);
         Serial.print('.');

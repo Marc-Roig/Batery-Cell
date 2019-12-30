@@ -27,4 +27,12 @@ public:
     void addAP(const char*, const char*){}
     int8_t run() {return WL_CONNECTED;}
 };
+
+uint8_t* charToUint8(const char* msg, size_t length);
+void testWS();
+void testCorrectSequenceName();
+void testReceiveStartSequence();
+void test();
+
+
 #endif

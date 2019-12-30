@@ -10,19 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="638f5beb-33fc-4df5-aaa3-feb97b6b3a01" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/BateryCell/BateryCellSequences.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BateryCell/BateryCellSequences.ino" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BateryCell/Credentials.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BateryCell/FireBaseOperations.ino" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/esp32/firebase.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BateryCell/BateryCell.ino" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/BateryCell.ino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BateryCell/Core0.h" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/Core0.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BateryCell/Globals.h" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/Globals.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BateryCell/Instruments.ino" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/Instruments.ino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BateryCell/WebsocketInstrument.h" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/WebsocketInstrument.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BateryCell/WebsocketMessages.ino" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/WebsocketMessages.ino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BateryCell/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/main.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BateryCell/Core0.ino" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/Core0.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BateryCell/FireBaseOperations.ino" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/FireBaseOperations.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BateryCell/Tests.h" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/Tests.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BateryCell/Tests.ino" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/Tests.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CONTRIBUTIONS.md" beforeDir="false" afterPath="$PROJECT_DIR$/CONTRIBUTIONS.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,55 +30,61 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/BateryCell/BateryCellSequences.ino">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="408">
-                  <caret line="75" column="29" selection-start-line="75" selection-start-column="29" selection-end-line="75" selection-end-column="29" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/README.md">
-              <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-                <state split_layout="SPLIT">
-                  <first_editor relative-caret-position="544">
-                    <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
-                  </first_editor>
-                  <second_editor />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/BateryCell/BateryCellSequences.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="119">
-                  <caret line="7" column="31" lean-forward="true" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/BateryCell/BateryCellSequences.ino">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="645">
-                  <caret line="104" column="33" selection-start-line="104" selection-start-column="33" selection-end-line="104" selection-end-column="33" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BateryCell/BateryCell.ino">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="42" selection-start-line="42" selection-end-line="42" />
+              <folding>
+                <element signature="e#19#845#0" />
+                <element signature="e#847#1087#0" />
+                <element signature="e#1089#1683#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BateryCell/FireBaseOperations.ino">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="326">
+              <caret line="21" column="22" lean-forward="true" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/docs/esp32/firebase.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="691">
+                <caret line="147" column="3" selection-start-line="147" selection-start-column="3" selection-end-line="147" selection-end-column="3" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BateryCell/Tests.ino">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1349">
+              <caret line="84" selection-start-line="84" selection-end-line="84" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BateryCell/Globals.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -98,7 +100,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/BateryCell/InstrumentsOperations.ino" />
         <option value="$PROJECT_DIR$/BateryCell/WebsocketOperations.ino" />
         <option value="$PROJECT_DIR$/BateryCell/WebsocketOperations.h" />
@@ -108,20 +109,25 @@
         <option value="$PROJECT_DIR$/BateryCell/InstrumentsVariant.h" />
         <option value="$PROJECT_DIR$/BateryCell/WebsocketOperationsTest.ino" />
         <option value="$PROJECT_DIR$/BateryCell/WebsocketInstrument.ino" />
-        <option value="$PROJECT_DIR$/BateryCell/Core0.ino" />
         <option value="$PROJECT_DIR$/BateryCell/WebsocketInstrument.h" />
-        <option value="$PROJECT_DIR$/BateryCell/BateryCell.ino" />
         <option value="$PROJECT_DIR$/BateryCell/WebsocketMessages.ino" />
         <option value="$PROJECT_DIR$/BateryCell/Instruments.ino" />
         <option value="$PROJECT_DIR$/BateryCell/Core0.h" />
         <option value="$PROJECT_DIR$/BateryCell/Globals.h" />
-        <option value="$PROJECT_DIR$/BateryCell/FireBaseOperations.ino" />
-        <option value="$PROJECT_DIR$/BateryCell/Credentials.h" />
         <option value="$PROJECT_DIR$/BateryCell/BateryCellSequences.h" />
         <option value="$PROJECT_DIR$/BateryCell/ExperimentSequences.ino" />
         <option value="$PROJECT_DIR$/BateryCell/BateryCellSequences.ino" />
         <option value="$PROJECT_DIR$/BateryCell/main.h" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/BateryCell/Credentials.h" />
+        <option value="$PROJECT_DIR$/BateryCell/Core0.ino" />
+        <option value="$PROJECT_DIR$/BateryCell/Tests.ino" />
+        <option value="$PROJECT_DIR$/BateryCell/Tests.h" />
+        <option value="$PROJECT_DIR$/BateryCell/BateryCell.ino" />
+        <option value="$PROJECT_DIR$/BateryCell/FireBaseOperations.ino" />
+        <option value="$PROJECT_DIR$/CONTRIBUTIONS.md" />
+        <option value="$PROJECT_DIR$/docs/esp32/firebase.md" />
       </list>
     </option>
   </component>
@@ -142,11 +148,6 @@
             <path>
               <item name="Batery-Cell" type="b2602c69:ProjectViewProjectNode" />
               <item name="Batery-Cell" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Batery-Cell" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Batery-Cell" type="462c0819:PsiDirectoryNode" />
-              <item name="BateryCell" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -183,18 +184,20 @@
       <workItem from="1577272888314" duration="2151000" />
       <workItem from="1577354537194" duration="1947000" />
       <workItem from="1577431947986" duration="9047000" />
-      <workItem from="1577527920974" duration="5482000" />
+      <workItem from="1577527920974" duration="7343000" />
+      <workItem from="1577603946544" duration="1377000" />
+      <workItem from="1577695055066" duration="4060000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18665000" />
+    <option name="totallyTimeSpent" value="25963000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-2" width="1920" height="1082" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.18283582" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18496802" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -206,7 +209,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.19102296" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.19102296" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -234,17 +237,18 @@
       <window_info anchor="right" id="Database" order="3" />
     </layout-to-restore>
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/BateryCell/FireBaseOperations.ino</url>
+          <line>45</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/BateryCell/Tests.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="28" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BateryCell/Tests.ino">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/BateryCell/.idea/dictionaries/m1.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -252,24 +256,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BateryCell/WebsocketMessages.h">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret selection-end-line="6" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BateryCell/InstrumentsVariant.ino">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
         </state>
       </provider>
     </entry>
@@ -343,16 +333,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BateryCell/Core0.ino">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-          <folding>
-            <element signature="e#100#149#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BateryCell/Instruments.ino">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="428">
@@ -370,44 +350,13 @@
     <entry file="file://$PROJECT_DIR$/BateryCell/Sequence.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/BateryCell/BateryCell.ino">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="46" selection-start-line="23" selection-start-column="46" selection-end-line="23" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BateryCell/FireBaseOperations.ino">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BateryCell/ExperimentSequences.h">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BateryCell/Credentials.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="6" lean-forward="true" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BateryCell/ExperimentSequences.ino">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="24" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BateryCell/main.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="39" selection-start-line="39" selection-end-line="39" />
-          <folding>
-            <element signature="e#269#293#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -418,6 +367,43 @@
           <folding>
             <element signature="e#985#1075#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BateryCell/main.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+          <folding>
+            <element signature="e#595#621#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BateryCell/InstrumentsVariant.ino">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BateryCell/Core0.ino">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+          <folding>
+            <element signature="e#100#149#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BateryCell/Credentials.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="21" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -434,21 +420,74 @@
     <entry file="file://$PROJECT_DIR$/BateryCell/BateryCellSequences.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="7" column="31" lean-forward="true" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BateryCell/Globals.h">
+    <entry file="file://$PROJECT_DIR$/BateryCell/Tests.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+        <state relative-caret-position="306">
+          <caret line="18" column="16" lean-forward="true" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BateryCell/BateryCellSequences.ino">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="104" column="33" selection-start-line="104" selection-start-column="33" selection-end-line="104" selection-end-column="33" />
+        <state relative-caret-position="1309">
+          <caret line="77" column="20" selection-start-line="77" selection-start-column="20" selection-end-line="77" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BateryCell/Globals.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BateryCell/Tests.ino">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1349">
+          <caret line="84" selection-start-line="84" selection-end-line="84" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BateryCell/BateryCell.ino">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="42" selection-start-line="42" selection-end-line="42" />
+          <folding>
+            <element signature="e#19#845#0" />
+            <element signature="e#847#1087#0" />
+            <element signature="e#1089#1683#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CONTRIBUTIONS.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="68">
+            <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BateryCell/FireBaseOperations.ino">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="21" column="22" lean-forward="true" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/esp32/firebase.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="691">
+            <caret line="147" column="3" selection-start-line="147" selection-start-column="3" selection-end-line="147" selection-end-column="3" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

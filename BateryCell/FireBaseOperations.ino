@@ -5,8 +5,6 @@
 #include "FirebaseESP32.h"
 
 
-
-
 void initFirebase() {
 
     Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
@@ -28,12 +26,19 @@ void test_firebase() {
     String path = "/sequence";
     String out;
 
+    if (Firebase.pathExist(firebaseData, path)) {
+        Serial.println("ok");
+    }
+
     if (Firebase.getJSON(firebaseData, path)) {
         Serial.println(firebaseData.jsonData());
     } else {
         Serial.println("REASON: " + firebaseData.errorReason());
     }
 
+    if (Firebase.setInt(firebaseData, path + "content/actions1", 1)) {
+        Serial.println("PASSED");
+    }
     // String jsonData = "{\"clean\":\"ok\"}";
 
     // if (Firebase.pushJSON(firebaseData, path, jsonData)) {

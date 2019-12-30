@@ -41,83 +41,6 @@ void create_normal_sequence() {
 
 }
 
-
-uint8_t* charToUint8(const char* msg, size_t length) {
-
-    const char* beg = msg;
-    const char* end = msg + length;
-
-    uint8_t* msg2 = new uint8_t[length];
-
-    size_t i = 0;
-    for (; beg != end; ++beg, ++i)
-    {
-        msg2[i] = (uint8_t)(*beg);
-    }
-
-    return msg2;
-}
-
-void testWS() {
-    // Incorrect sequence
-    Serial.println("[TEST] Sequence start with invalid name");
-    const char* start_sequence_msg = "{\"type\":\"sequence_start\",\"from\":\"server\",\"to\":\"microcontroller\",\"content\":{\"sequence\":\"clean_operation\",\"experiment_id\":\"aSEFasdWEs\"}}";
-    size_t length = strlen(start_sequence_msg) + 1;
-    uint8_t* msg_incorrect_sequence = charToUint8(start_sequence_msg, length);
-    handleWsMessage(msg_incorrect_sequence, length, 1 /* verbose */);
-    delete[] msg_incorrect_sequence;
-
-}
-
-void testCorrectSequenceName() {
-    // correct sequence
-    Serial.println("[TEST] Sequence start with valid name");
-    const char *start_sequence_msg = "{\"type\":\"sequence_start\",\"from\":\"server\",\"to\":\"microcontroller\",\"content\":{\"sequence\":\"clean_operation\",\"experiment_id\":\"aSEFasdWEs\"}}";
-    size_t length = strlen(start_sequence_msg) + 1;
-    create_clean_sequence();
-    uint8_t* msg_correct_sequence = charToUint8(start_sequence_msg, length);
-    handleWsMessage(msg_correct_sequence, length, 1 /* verbose */);
-    delete[] msg_correct_sequence;
-}
-
-void testReceiveStartSequence() {
-
-    testCorrectSequenceName();
-
-    // ---- Receive message
-    Serial.println("[TEST] Get message from freertos queue");
-    if (wsQueueStartSequence != 0) {
-        WSMessage wsMessage;
-        if ( xQueueReceive( wsQueueStartSequence, &(wsMessage), ( TickType_t ) 1000) == pdPASS) {
-            Serial.print("--> Message content: ");
-            Serial.println(wsMessage.content);
-            Serial.print("--> Message type: ");
-            Serial.println(wsMessage.type);
-            Serial.println("[TEST] Execute sequence");
-            Sequence sequence = sequences[wsMessage.content];
-            sequence.executeAll();
-
-        } else {
-            Serial.println("[ERROR] Failed to Receive QueueStartSequence message");
-        }
-
-    }
-}
-
-void test() {
-
-    testReceiveStartSequence();
-
-    // -- Test sending WS Message
-    Serial.println("[TEST] Sequence WS start experiment");
-    create_normal_sequence();
-    Sequence sequence = sequences["normal_operation"];
-
-    sequence.executeAll();
-
-
-}
-
 void setup() {
 
     Serial.begin(115200);
@@ -126,32 +49,12 @@ void setup() {
     initialize_instruments();
     initCore0();
 
-    delay(1000);
+    delay(500);
 
-    test();
-
-
-//    // Sequence initSeq;
-//    // initSeq.add("R", GET_POSITION_FROM_DATABASE);
-
-
-//    Sequence testSeq;
-//    testSeq.add("R", REVOLVER_ENABLE);
-//    testSeq.add("R", REVOLVER_ROTATE_ABSOLUTE, 29);
-//    // testSeq.addDelay(1000);
-//    testSeq.add("R", REVOLVER_ROTATE_ABSOLUTE, 0);
-//    testSeq.add("R", REVOLVER_DISABLE);
-//
-//    // testSeq.add("WebSocket", WS_START_EXPERIMENT);
-//    // testSeq.add("WebSocket", WS_START_MEASUREMENTS);
-//    // testSeq.add("WebSocket", WS_STORE_DATA_FROM_EXPERIMENTS);
-//    // testSeq.add("WebSocket", WS_STORE_DATA_FROM_MEASUREMENTS);
-//
-//    testSeq.executeAll();
+//    test();
 
 }
 
-//static std::map<String, void (*callback)()> commands_map;
 
 void loop() {
 
