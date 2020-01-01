@@ -1,56 +1,86 @@
 #include "main.h"
 
-#include <WiFi.h>
-#include <ArduinoJson.h>
-#include "FirebaseESP32.h"
+FirebaseData FirebaseOperation::firebaseData;
+String FirebaseOperation::workingSequence = "";
 
 
-void initFirebase() {
+void FirebaseOperation::initFirebase() {
 
     Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
     Firebase.reconnectWiFi(true);
 
     //Set database read timeout to 1 minute (max 15 minutes)
-    Firebase.setReadTimeout(firebaseData, 1000 * 60);
+    Firebase.setReadTimeout(this->firebaseData, 1000 * 60);
     //tiny, small, medium, large and unlimited.
     //Size and its write timeout e.g. tiny (1s), small (10s), medium (30s) and large (60s).
-    Firebase.setwriteSizeLimit(firebaseData, "small");
-
+    Firebase.setwriteSizeLimit(this->firebaseData, "small");
 
 }
 
-void test_firebase() {
+void FirebaseOperation::_setOperationAsPending(InstrumentVariant& variant, int operation_idx) {
 
+    // When starting a sequence, set the workingSequence name
+    // Each time an operation ends this function is called and specified the operation idx in the sequence
+    // to update.
 
+    if (Firebase.pathExist(this->firebaseData, this->workingSequence)) {
+        // Get path to update
+        String operation_path = this->workingSequence + "/content/actions/";
+        operation_path += (char) (operation_idx + 48); // Transform idx to char and append value to the path
+        operation_path += "/status";
 
-    String path = "/sequence";
-    String out;
+        // Update status
+        Firebase.setInt(firebaseData, operation_path, 0);
 
-    if (Firebase.pathExist(firebaseData, path)) {
-        Serial.println("ok");
-    }
-
-    if (Firebase.getJSON(firebaseData, path)) {
-        Serial.println(firebaseData.jsonData());
     } else {
-        Serial.println("REASON: " + firebaseData.errorReason());
+        Serial.print("[ERROR] FireBase path does not exist");
+        Serial.println(this->workingSequence);
     }
 
-    if (Firebase.setInt(firebaseData, path + "content/actions1", 1)) {
-        Serial.println("PASSED");
+}
+
+
+void FirebaseOperation::_setOperationAsDone(InstrumentVariant& variant, int operation_idx) {
+
+    // When starting a sequence, set the workingSequence name
+    // Each time an operation ends this function is called and specified the operation idx in the sequence
+    // to update.
+
+    if (Firebase.pathExist(this->firebaseData, this->workingSequence)) {
+        // Get path to update
+        String operation_path = this->workingSequence + "/content/actions/";
+        operation_path += (char) (operation_idx + 48); // Transform idx to char and append value to the path
+        operation_path += "/status";
+
+        // Update status
+        Firebase.setInt(firebaseData, operation_path, 1);
+
+    } else {
+        Serial.print("[ERROR] FireBase path does not exist");
+        Serial.println(this->workingSequence);
     }
-    // String jsonData = "{\"clean\":\"ok\"}";
 
-    // if (Firebase.pushJSON(firebaseData, path, jsonData)) {
+}
 
-    //   Serial.println(firebaseData.dataPath());
 
-    //   Serial.println(firebaseData.pushName());
+void FirebaseOperation::_setOperationAsFailed(InstrumentVariant& variant, int operation_idx) {
 
-    //   Serial.println(firebaseData.dataPath() + "/"+ firebaseData.pushName());
+    // When starting a sequence, set the workingSequence name
+    // Each time an operation ends this function is called and specified the operation idx in the sequence
+    // to update.
 
-    // } else {
-    //   Serial.println(firebaseData.errorReason());
-    // }
+    if (Firebase.pathExist(this->firebaseData, this->workingSequence)) {
+        // Get path to update
+        String operation_path = this->workingSequence + "/content/actions/";
+        operation_path += (char) (operation_idx + 48); // Transform idx to char and append value to the path
+        operation_path += "/status";
+
+        // Update status
+        Firebase.setInt(firebaseData, operation_path, 2);
+
+    } else {
+        Serial.print("[ERROR] FireBase path does not exist");
+        Serial.println(this->workingSequence);
+    }
 
 }

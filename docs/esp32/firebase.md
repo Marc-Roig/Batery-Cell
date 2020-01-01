@@ -1,55 +1,52 @@
 # FIREBASE ESP32
 
-## WORK WITH JSONS
-
 - Dependencies:
 
-https://github.com/mobizt/Firebase-ESP32
+    - https://github.com/mobizt/Firebase-ESP32
+    - https://github.com/mobizt/HTTPClientESP32Ex
 
-### Set elements
+## Get elements
 
 ```C++
 #include <WiFi.h>
 #include <FirebaseESP32.h>
 
 FirebaseData firebaseData;
-FirebaseJson json;
-
-// Populate json
-json.clear().add("len", 2);
-// You can edit the json keys
-json.set("len", 3);
-```
-
-### Push Json
-
-```C++
-if (Firebase.pushJSON(firebaseData, "experiment/sequence", json)) {
+Firebase.getInt(firebaseData, path + "/int/Data")
+if (Firebase.getInt(firebaseData, path + "/Double/Data" + (i + 1))) {
     Serial.println("PASSED");
     Serial.println("PATH: " + firebaseData.dataPath());
-    Serial.println(firebaseData.pushName());
+    Serial.println("TYPE: " + firebaseData.dataType());
     Serial.println("ETag: " + firebaseData.ETag());
-} else {
-    Serial.println("FAILED");
-    Serial.println("REASON: " + firebaseData.errorReason());
+    if (firebaseData.dataType() == "int")
+        Serial.println(firebaseData.intData());
 }
 ```
 
-### Update Node
-
+From an array you can:
 ```C++
+FirebaseJsonData jsonData;
 
-if (Firebase.updateNode(firebaseData, "experiment/sequence", json)) {
-    Serial.println("PASSED");
-    Serial.println("PATH: " + firebaseData.dataPath());
-    Serial.println(firebaseData.pushName());
-    Serial.println("ETag: " + firebaseData.ETag());
-} else {
-    Serial.println("FAILED");
-    Serial.println("REASON: " + firebaseData.errorReason());
-}
+arr.get(jsonData, "[1]/food");
 ```
 
+To get other types:
+
+```C++
+    Serial.println(data.intData());
+    Serial.println(data.floatData(), 5);
+    printf("%.9lf\n", data.doubleData());
+    Serial.println(data.boolData() == 1 ? "true" : "false");
+    Serial.println(data.stringData());
+```
+
+### Print Json
+
+```C++
+String jsonStr;
+json.toString(jsonStr, true);
+Serial.println(jsonStr);
+```
 
 ### Iterate Json
 
@@ -103,10 +100,10 @@ void iterateJson(FirebaseData &data) {
 
 ```C++
 
-void iterateJson(FirebaseData &data) {
+void iterateArray(FirebaseData &data) {
 
     // Allowed dataTypes => int | float | double | boolean | string | json | array
-    if (data.dataType == "arrat") {
+    if (data.dataType == "array") {
         
         // Extract array from data
         FirebaseJsonArray &arr = data.jsonArray();
@@ -138,7 +135,7 @@ void iterateJson(FirebaseData &data) {
                 jsonData.typeNum == JSON_NULL ||
                 jsonData.typeNum == JSON_OBJECT ||
                 jsonData.typeNum == JSON_ARRAY)
-                
+
             Serial.println(jsonData.stringValue);
         }
 
@@ -146,3 +143,48 @@ void iterateJson(FirebaseData &data) {
 }
 
 ```
+
+## Set elements
+
+```C++
+#include <WiFi.h>
+#include <FirebaseESP32.h>
+
+FirebaseData firebaseData;
+FirebaseJson json;
+
+// Populate json
+json.clear().add("len", 2);
+// You can edit the json keys
+json.set("len", 3);
+```
+
+### Push Json
+
+```C++
+if (Firebase.pushJSON(firebaseData, "experiment/sequence", json)) {
+    Serial.println("PASSED");
+    Serial.println("PATH: " + firebaseData.dataPath());
+    Serial.println(firebaseData.pushName());
+    Serial.println("ETag: " + firebaseData.ETag());
+} else {
+    Serial.println("FAILED");
+    Serial.println("REASON: " + firebaseData.errorReason());
+}
+```
+
+### Update Node
+
+```C++
+
+if (Firebase.updateNode(firebaseData, "experiment/sequence", json)) {
+    Serial.println("PASSED");
+    Serial.println("PATH: " + firebaseData.dataPath());
+    Serial.println(firebaseData.pushName());
+    Serial.println("ETag: " + firebaseData.ETag());
+} else {
+    Serial.println("FAILED");
+    Serial.println("REASON: " + firebaseData.errorReason());
+}
+```
+

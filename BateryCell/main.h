@@ -13,8 +13,8 @@
 #include <unordered_map>
 
 // Utils
-#include <ArduinoJson.h>
-#include <FirebaseESP32.h>
+#include <ArduinoJson.h>    // Used by FireBaseOperations.h and files related to WebSocket communication
+#include <FirebaseESP32.h>  // Used by FireBaseOperations.h
 
 // Instruments / Operations definitions
 #include "Instruments.h"
