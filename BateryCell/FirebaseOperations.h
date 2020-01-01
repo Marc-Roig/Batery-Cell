@@ -11,16 +11,11 @@ class FirebaseOperation {
 public:
 
     static FirebaseData firebaseData;
-    static String workingSequence;
 
     static void initFirebase();
 
-    static Operation_t setOperationAsPending;
-    static Operation_t setOperationAsDone;
-    static Operation_t setOperationAsFailed;
-
-    static void _setOperationAsPending(InstrumentVariant& variant, int content);
-    static void _setOperationAsDone(InstrumentVariant& variant, int content);
-    static void _setOperationAsFailed(InstrumentVariant& variant, int content);
+    static void setOperationAsPending(String firebase_id, int operation_idx);
+    static void setOperationAsDone(String firebase_id, int operation_idx);
+    static void setOperationAsFailed(String firebase_id, int operation_idx);
 };
 #endif //BATERY_CELL_FIREBASEOPERATIONS_H

@@ -19,9 +19,9 @@ void handleWsStartSequenceMessage(const DynamicJsonDocument &doc, int verbose) {
     const char* experiment_id = doc["content"]["experiment_id"];
     size_t exp_id_length = strlen(sequence_name) + 1;
 
-    // Copy sequence name and message type to the wsMessage variable
+    // Copy sequence name and experiment id to the wsMessage variable
     strncpy(wsMessage.content, sequence_name, seq_name_length);
-    strncpy(wsMessage.type, "0", 1);
+    strncpy(wsMessage.type, experiment_id, exp_id_length);
 
     // Start building response message to send to server
     response_doc["type"] = "sequence_request_response";

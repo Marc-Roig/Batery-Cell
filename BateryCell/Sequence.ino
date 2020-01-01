@@ -102,13 +102,20 @@ Sequence& Sequence::addDelayMinutes(int min) {
 }
 
 
+void Sequence::setFireBaseId(const String _fireBaseId) {
+
+    fireBaseId = _fireBaseId;
+
+}
+
+
 int Sequence::execute(int idx) {
 
 
     // @TODO: Read Core0 message (?)
 
     if (idx >= size()) {
-        // std::cout << std::endl << "[ERROR] SEQUENCE INDEX OUT OF RANGE";
+        Serial.println("[ERROR] Sequence index out of range");
         return idx;
     }
 
@@ -127,10 +134,13 @@ int Sequence::execute(int idx) {
         // Call callback function
         callback(instrumentVariant, msg);
 
+        FirebaseOperation::setOperationAsDone(fireBaseId, idx);
+
         return -1;
 
     }
 
+    FirebaseOperation::setOperationAsFailed(fireBaseId, idx);
     return idx;
 
 }
@@ -152,7 +162,6 @@ int Sequence::executeAll() {
 
     for (int i = 0; i < size(); i++) {
         if (execute(i) != -1) {
-            Serial.println("ERROR");
             return i;
         }
     }

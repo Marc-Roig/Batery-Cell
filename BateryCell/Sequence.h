@@ -25,6 +25,7 @@ public:
     std::vector<const char*> names_list;
     std::vector<Operation_t> callbacks_list;
     std::vector<int> msgs_list;
+    String fireBaseId = "";
 
     int sequence_idx = 0;
 
@@ -50,6 +51,9 @@ public:
 
     // Add min delay in the sequence
     Sequence& addDelayMinutes(int min);
+
+    // Set fireBase ID to update operations status
+    void setFireBaseId(const String _fireBaseId);
 
     // Execute operation from sequence located at position idx
     int execute(int idx);

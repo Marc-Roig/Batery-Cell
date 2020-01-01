@@ -5,7 +5,7 @@ Sequence buildSequenceEppendorfFill() {
 
     Sequence seqFillNextEppendorf;
 
-    seqFillNextEppendorf.add("R", REVOLVER_ROTATE_TONEXT, 1)
+    seqFillNextEppendorf.add("R", REVOLVER_ROTATE_TO_NEXT, 1)
             .add("V5", OPEN_VALVE)
             .add("V6", OPEN_VALVE)
             .addDelay(EPENDORF_FILL_TIME)
@@ -75,8 +75,11 @@ Sequence buildPhase2() {
             .add("MSc", MOTORSTIRRER_SET_SPEED, MAGNETIC_STIRRER_HIGH_SPEED)
             .add("MSa", MOTORSTIRRER_SET_SPEED, MAGNETIC_STIRRER_HIGH_SPEED)
             .addDelay(TIME_TO_HOMOGENIZE_SOLUTION_MS)
-                    // @TODO: !! START EXPERIMENT !!
-            .addDelay(REACTION_TIME_MINUTES)
+            .add("Websocket", WS_START_EXPERIMENT)
+            .add("Websocket", WS_START_MEASUREMENTS)
+            .addDelayMinutes(REACTION_TIME_MINUTES)
+            .add("Websocket", WS_STOP_MEASUREMENTS)
+            .add("Websocket", WS_STOP_EXPERIMENT)
             .add("MSc", MOTORSTIRRER_SET_SPEED, MAGNETIC_STIRRER_STOP)
             .add("MSa", MOTORSTIRRER_SET_SPEED, MAGNETIC_STIRRER_STOP)
             .addDelay(5000)

@@ -26,6 +26,7 @@
 #include "WebsocketOperations.h"
 #include "WebsocketOperationsTest.h"
 #include "WebsocketMessages.h"
+#include "FirebaseOperations.h"
 
 // Sequence
 #include "Sequence.h"
@@ -39,6 +40,6 @@
 #include "BateryCellSequences.h"
 
 #include "Globals.h"
-
+#include "Parameters.h"
 
 #endif
