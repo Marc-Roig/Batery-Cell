@@ -36,7 +36,8 @@ void handleWsMessage(uint8_t * payload, size_t length, uint8_t verbose=0);
 #ifdef TEST_FLAG
 #include "Tests.h"
 extern WebSocketsClientMock webSocket;
-extern WiFiMultiMock WiFi_Multi;
+//extern WiFiMultiMock WiFi_Multi;
+extern WiFiMulti WiFi_Multi;
 #else
 extern WebSocketsClient webSocket;
 extern WiFiMulti WiFi_Multi;

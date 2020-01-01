@@ -16,31 +16,6 @@ void initialize_instruments() {
     Sequence::setNewInstrument("SleepMinutes", -1);
 }
 
-void create_clean_sequence() {
-
-
-    Sequence cleanSeq;
-    cleanSeq.add("R", REVOLVER_ENABLE);
-//    cleanSeq.add("R", REVOLVER_ROTATE_TO_NEXT);
-    cleanSeq.add("R", REVOLVER_DISABLE);
-
-    storeNewSequence(cleanSeq, "clean_operation");
-}
-
-void create_normal_sequence() {
-
-
-    Sequence normSeq;
-    normSeq.add("WebSocket", WS_DEBUG_END_OF_OPERATION); // Simulate server ok response for the next element of seq.
-    normSeq.add("WebSocket", WS_START_EXPERIMENT);
-    normSeq.add("WebSocket", WS_DEBUG_END_OF_OPERATION); // Simulate server ok response for the next element of seq.
-    normSeq.add("WebSocket", WS_STOP_EXPERIMENT);
-    normSeq.addDelay(1000); // Give time to process the last element of seq. before ending sequence
-    normSeq.add("WebSocket", WS_END_OF_SEQUENCE);
-    storeNewSequence(normSeq, "normal_operation");
-
-}
-
 void setup() {
 
     // Serial initialization for console debugging
@@ -50,44 +25,44 @@ void setup() {
     // Name all instruments used
     initialize_instruments();
 
-    // Initialize firebase communication
-    FirebaseOperation::initFirebase();
-
     // Initialize core 0 main thread (Current is in core 1) and any queue / signal for
     // internal communication between cores
     initCore0();
 
+    // Initialize firebase communication
+    FirebaseOperation::initFirebase();
+
     // Wait time to let everything run
     delay(500);
 
-//    test();
+    test();
 
 }
 
 
 void loop() {
 
-    // Receive the commands from server
-    if (wsQueueStartSequence != 0) {
-        WSMessage wsMessage;
-        if (xQueueReceive(wsQueueStartSequence, &(wsMessage), portMAX_DELAY) == pdPASS) {
-
-            Serial.print("[INFO] Executing sequence: ");
-            Serial.println(wsMessage.content);
-
-            // Get sequence from it's name
-            Sequence sequence = sequences[wsMessage.content];
-
-            // Set sequence fireBase id to update operations status
-            String exp_id = String(wsMessage.type);
-            sequence.setFireBaseId(exp_id);
-
-            // Execute sequence
-            sequence.executeAll();
-
-        } else {
-            Serial.println("[ERROR] Failed to Receive QueueStartSequence message");
-        }
-    }
+//    // Receive the commands from server
+//    if (wsQueueStartSequence != 0) {
+//        WSMessage wsMessage;
+//        if (xQueueReceive(wsQueueStartSequence, &(wsMessage), portMAX_DELAY) == pdPASS) {
+//
+//            Serial.print("[INFO] Executing sequence: ");
+//            Serial.println(wsMessage.content);
+//
+//            // Get sequence from it's name
+//            Sequence sequence = sequences[wsMessage.content];
+//
+//            // Set sequence fireBase id to update operations status
+//            String exp_id = String(wsMessage.type);
+//            sequence.setFireBaseId(exp_id);
+//
+//            // Execute sequence
+//            sequence.executeAll();
+//
+//        } else {
+//            Serial.println("[ERROR] Failed to Receive QueueStartSequence message");
+//        }
+//    }
 
 }

@@ -71,10 +71,35 @@ void testWS() {
 
 }
 
+void create_clean_sequence() {
+
+
+    Sequence cleanSeq;
+    cleanSeq.add("R", REVOLVER_ENABLE);
+//    cleanSeq.add("R", REVOLVER_ROTATE_TO_NEXT);
+    cleanSeq.add("R", REVOLVER_DISABLE);
+
+    storeNewSequence(cleanSeq, "clean_operation");
+}
+
+void create_normal_sequence() {
+
+
+    Sequence normSeq;
+    normSeq.add("WebSocket", WS_DEBUG_END_OF_OPERATION); // Simulate server ok response for the next element of seq.
+    normSeq.add("WebSocket", WS_START_EXPERIMENT);
+    normSeq.add("WebSocket", WS_DEBUG_END_OF_OPERATION); // Simulate server ok response for the next element of seq.
+    normSeq.add("WebSocket", WS_STOP_EXPERIMENT);
+    normSeq.addDelay(1000); // Give time to process the last element of seq. before ending sequence
+    normSeq.add("WebSocket", WS_END_OF_SEQUENCE);
+    storeNewSequence(normSeq, "normal_operation");
+
+}
+
 void testCorrectSequenceName() {
     // correct sequence
     Serial.println("[TEST] Sequence start with valid name");
-    const char *start_sequence_msg = "{\"type\":\"sequence_start\",\"from\":\"server\",\"to\":\"microcontroller\",\"content\":{\"sequence\":\"clean_operation\",\"experiment_id\":\"aSEFasdWEs\"}}";
+    const char *start_sequence_msg = "{\"type\":\"sequence_start\",\"from\":\"server\",\"to\":\"microcontroller\",\"content\":{\"sequence\":\"clean_operation\",\"experiment_id\":\"-LxVpoNVlj3UhVthtbVf\"}}";
     size_t length = strlen(start_sequence_msg) + 1;
     create_clean_sequence();
     uint8_t* msg_correct_sequence = charToUint8(start_sequence_msg, length);
@@ -84,19 +109,29 @@ void testCorrectSequenceName() {
 
 void testReceiveStartSequence() {
 
+    // Simulate receiving start of sequence request from server
     testCorrectSequenceName();
 
-    // ---- Receive message
+    // Get message stored on wsQueueStartSequence queue
     Serial.println("[TEST] Get message from freertos queue");
     if (wsQueueStartSequence != 0) {
         WSMessage wsMessage;
+
         if ( xQueueReceive( wsQueueStartSequence, &(wsMessage), ( TickType_t ) 1000) == pdPASS) {
             Serial.print("--> Message content: ");
             Serial.println(wsMessage.content);
             Serial.print("--> Message type: ");
             Serial.println(wsMessage.type);
             Serial.println("[TEST] Execute sequence");
+
+            // Get sequence from it's name
             Sequence sequence = sequences[wsMessage.content];
+
+            // Set sequence fireBase id to update operations status
+            String exp_id = String(wsMessage.type);
+            sequence.setFireBaseId(exp_id);
+
+            // Execute seuqence
             sequence.executeAll();
 
         } else {
@@ -111,11 +146,11 @@ void test() {
     testReceiveStartSequence();
 
     // -- Test sending WS Message
-    Serial.println("[TEST] Sequence WS start experiment");
-    create_normal_sequence();
-    Sequence sequence = sequences["normal_operation"];
+//    Serial.println("[TEST] Sequence WS start experiment");
+//    create_normal_sequence();
+//    Sequence sequence = sequences["normal_operation"];
 
-    sequence.executeAll();
+//    sequence.executeAll();
 
 
 }

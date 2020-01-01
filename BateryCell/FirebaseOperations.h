@@ -5,8 +5,6 @@
 #ifndef BATERY_CELL_FIREBASEOPERATIONS_H
 #define BATERY_CELL_FIREBASEOPERATIONS_H
 
-void initFirebase();
-
 class FirebaseOperation {
 public:
 

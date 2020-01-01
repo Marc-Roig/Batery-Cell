@@ -11,13 +11,12 @@ void handleWsStartSequenceMessage(const DynamicJsonDocument &doc, int verbose) {
     const size_t capacity = JSON_OBJECT_SIZE(8);
     DynamicJsonDocument response_doc(capacity);
 
-
     // Get values we need from the message
     const char* sequence_name = doc["content"]["sequence"];
     size_t seq_name_length = strlen(sequence_name) + 1;
 
     const char* experiment_id = doc["content"]["experiment_id"];
-    size_t exp_id_length = strlen(sequence_name) + 1;
+    size_t exp_id_length = strlen(experiment_id) + 1;
 
     // Copy sequence name and experiment id to the wsMessage variable
     strncpy(wsMessage.content, sequence_name, seq_name_length);

@@ -23,9 +23,11 @@ void FirebaseOperation::setOperationAsPending(String firebase_id, int operation_
     // Each time an operation ends this function is called and specified the operation idx in the sequence
     // to update.
 
-    if (Firebase.pathExist(FirebaseOperation::firebaseData, firebase_id)) {
+    String operation_path = "/" + firebase_id;
+
+    if (Firebase.pathExist(FirebaseOperation::firebaseData, operation_path)) {
         // Get path to update
-        String operation_path = firebase_id + "/content/actions/";
+        operation_path += "/content/actions/";
         operation_path += (char) (operation_idx + 48); // Transform idx to char and append value to the path
         operation_path += "/status";
 
@@ -33,7 +35,7 @@ void FirebaseOperation::setOperationAsPending(String firebase_id, int operation_
         Firebase.setInt(firebaseData, operation_path, 0);
 
     } else {
-        Serial.print("[ERROR] FireBase path does not exist");
+        Serial.print("[ERROR] FireBase path does not exist: ");
         Serial.println(firebase_id);
     }
 
@@ -46,9 +48,14 @@ void FirebaseOperation::setOperationAsDone(String firebase_id, int operation_idx
     // Each time an operation ends this function is called and specified the operation idx in the sequence
     // to update.
 
-    if (Firebase.pathExist(FirebaseOperation::firebaseData, firebase_id)) {
+    String operation_path = "/" + firebase_id;
+
+    Serial.println(operation_path);
+
+    if (Firebase.pathExist(FirebaseOperation::firebaseData, operation_path)) {
         // Get path to update
-        String operation_path = firebase_id + "/content/actions/";
+        String operation_path = "/" + firebase_id;
+        operation_path += "/content/actions/";
         operation_path += (char) (operation_idx + 48); // Transform idx to char and append value to the path
         operation_path += "/status";
 
@@ -56,7 +63,7 @@ void FirebaseOperation::setOperationAsDone(String firebase_id, int operation_idx
         Firebase.setInt(firebaseData, operation_path, 1);
 
     } else {
-        Serial.print("[ERROR] FireBase path does not exist");
+        Serial.print("[ERROR] FireBase path does not exist: ");
         Serial.println(firebase_id);
     }
 
@@ -69,9 +76,12 @@ void FirebaseOperation::setOperationAsFailed(String firebase_id, int operation_i
     // Each time an operation ends this function is called and specified the operation idx in the sequence
     // to update.
 
-    if (Firebase.pathExist(FirebaseOperation::firebaseData, firebase_id)) {
+    String operation_path = "/" + firebase_id;
+
+    if (Firebase.pathExist(FirebaseOperation::firebaseData, operation_path)) {
         // Get path to update
-        String operation_path = firebase_id + "/content/actions/";
+        String operation_path = "/" + firebase_id;
+        operation_path += "/content/actions/";
         operation_path += (char) (operation_idx + 48); // Transform idx to char and append value to the path
         operation_path += "/status";
 
@@ -79,7 +89,7 @@ void FirebaseOperation::setOperationAsFailed(String firebase_id, int operation_i
         Firebase.setInt(firebaseData, operation_path, 2);
 
     } else {
-        Serial.print("[ERROR] FireBase path does not exist");
+        Serial.print("[ERROR] FireBase path does not exist: ");
         Serial.println(firebase_id);
     }
 

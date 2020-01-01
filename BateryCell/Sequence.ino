@@ -20,7 +20,7 @@ Sequence::Sequence(const Sequence& seq) {
 }
 
 
-Sequence& Sequence::add(const char* instrument, Operation_t callback, int msg=0) {
+Sequence& Sequence::add(const char* instrument, Operation_t callback, int msg /* =0 */ ) {
 
     if (Sequence::instruments.count(instrument) > 0) {
 
@@ -33,14 +33,6 @@ Sequence& Sequence::add(const char* instrument, Operation_t callback, int msg=0)
         Serial.println("Specified instrument in add Sequence method do not exist");
     }
 
-    return *this;
-
-}
-
-
-Sequence& Sequence::add(const char* instrument, Operation_t callback) {
-
-    add(instrument, callback, 0);
     return *this;
 
 }

@@ -2,7 +2,8 @@
 
 #ifdef TEST_FLAG
 WebSocketsClientMock webSocket;
-WiFiMultiMock WiFi_Multi;
+//WiFiMultiMock WiFi_Multi;
+WiFiMulti WiFi_Multi;
 #else
 WebSocketsClient webSocket;
 WiFiMulti WiFi_Multi;
@@ -47,14 +48,13 @@ void Core0Main(void * pvParameters) {
 
     webSocketInit();
 
-    Serial.println("Starting websocket");
-    
+    Serial.println("[INFO] WebSocket initialized");
 
     while ( true ) {
 
          webSocket.loop();
 
-        // Only if Websocket is online
+        // Only if WebSocket is online
         if (WS_online) {
             // Send Ws message to server to start an experiment
             // when core 1 asks for it through this queue

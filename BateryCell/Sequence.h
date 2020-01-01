@@ -35,10 +35,7 @@ public:
     Sequence(const Sequence& seq);
 
     // Add instrument operation to the sequence
-    Sequence& add(const char* instrument, Operation_t callback, int msg);
-    
-    // Add instrument operation to the sequence
-    Sequence& add(const char* instrument, Operation_t callback);
+    Sequence& add(const char* instrument, Operation_t callback, int msg = 0);
 
     // Append a new sequence
     Sequence& add(const Sequence& seq);
