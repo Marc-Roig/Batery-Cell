@@ -26,10 +26,10 @@
 #include "WebsocketOperations.h"
 #include "WebsocketOperationsTest.h"
 #include "WebsocketMessages.h"
-#include "FirebaseOperations.h"
 
 // Sequence
 #include "Sequence.h"
+#include "FirebaseOperations.h"
 
 // Other
 #include "HelperDefines.h"
@@ -39,6 +39,7 @@
 #include "ExperimentSequences.h"
 #include "BateryCellSequences.h"
 
+#include "Tests.h"
 #include "Globals.h"
 #include "Parameters.h"
 

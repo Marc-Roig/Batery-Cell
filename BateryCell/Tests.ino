@@ -1,5 +1,6 @@
 #include "main.h"
 
+
 // -- WEBSOCKET MOCK -- //
 void WebSocketsClientMock::begin(String _server_id, int _server_port, String _server_route) {
     server_id = _server_id;
@@ -75,10 +76,17 @@ void create_clean_sequence() {
 
 
     Sequence cleanSeq;
-    cleanSeq.add("R", REVOLVER_ENABLE);
-//    cleanSeq.add("R", REVOLVER_ROTATE_TO_NEXT);
-    cleanSeq.add("R", REVOLVER_DISABLE);
-
+    cleanSeq.add("R", REVOLVER_ENABLE)
+            .add("R", REVOLVER_ROTATE_TO_NEXT)
+            .add("R", REVOLVER_ROTATE_ABSOLUTE, 0)
+            .add("R", REVOLVER_ROTATE_TO_NEXT)
+            .add("R", REVOLVER_ROTATE_TO_PREVIOUS)
+            .add("R", REVOLVER_DISABLE)
+            .add("V5", OPEN_VALVE)
+            .add("V5", CLOSE_VALVE)
+            .addDelay(100)
+            .add("P", PUMP_SET_SPEED, PUMP_MAX_SPEED)
+            .add("P", PUMP_SET_SPEED, PUMP_STOP);
     storeNewSequence(cleanSeq, "clean_operation");
 }
 
@@ -131,7 +139,7 @@ void testReceiveStartSequence() {
             String exp_id = String(wsMessage.type);
             sequence.setFireBaseId(exp_id);
 
-            // Execute seuqence
+            // Execute sequence
             sequence.executeAll();
 
         } else {
@@ -143,7 +151,12 @@ void testReceiveStartSequence() {
 
 void test() {
 
-    testReceiveStartSequence();
+    create_clean_sequence();
+    const Sequence seq =  sequences["clean_operation"];
+
+    FirebaseOperation::uploadSequence(seq, "clean_operation");
+
+    //    testReceiveStartSequence();
 
     // -- Test sending WS Message
 //    Serial.println("[TEST] Sequence WS start experiment");

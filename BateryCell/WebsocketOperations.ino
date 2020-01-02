@@ -1,13 +1,11 @@
 #include "main.h"
 
-
 // WEBSOCKET OPERATIONS
-
-Operation_t WebsocketOperation::startExperiment  { WebsocketOperation::_startExperiment , " Start Experiment"};
-Operation_t WebsocketOperation::stopExperiment   { WebsocketOperation::_stopExperiment  , " Stop Experiment"};
-Operation_t WebsocketOperation::startMeasurements { WebsocketOperation::_startMeasurements, " Start Measurements "};
-Operation_t WebsocketOperation::stopMeasurements { WebsocketOperation::_stopMeasurements, " Stop Measurements"};
-Operation_t WebsocketOperation::endOfSequence { WebsocketOperation::_endOfSequence, "End of Sequence"};
+Operation_t WebsocketOperation::startExperiment   { WebsocketOperation::_startExperiment  , "WS Start Experiment"  };
+Operation_t WebsocketOperation::stopExperiment    { WebsocketOperation::_stopExperiment   , "WS Stop Experiment"   };
+Operation_t WebsocketOperation::startMeasurements { WebsocketOperation::_startMeasurements, "WS Start Measurements"};
+Operation_t WebsocketOperation::stopMeasurements  { WebsocketOperation::_stopMeasurements , "WS Stop Measurements" };
+Operation_t WebsocketOperation::endOfSequence     { WebsocketOperation::_endOfSequence    , "WS End of Sequence"   };
 
 
 // Send order to start experiment (and record necessary data)

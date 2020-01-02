@@ -2,8 +2,8 @@
 
 // -- VALVE -- //
 
-Operation_t ValveOperations::open  { ValveOperations::_open , " Open Valve: "};
-Operation_t ValveOperations::close { ValveOperations::_close, " Close Valve: "};
+Operation_t ValveOperations::open  { ValveOperations::_open , "Open Valve"};
+Operation_t ValveOperations::close { ValveOperations::_close, "Close Valve"};
 
 // Transform variant into Valve type and open valve
 void ValveOperations::_open(InstrumentVariant& _valve, int msg) {
@@ -36,11 +36,11 @@ void ValveOperations::_close(InstrumentVariant& _valve, int msg) {
 
 // -- REVOLVER -- //
 
-Operation_t RevolverOperations::enable           { RevolverOperations::_enable           , " Enabling Revolver: "      };
-Operation_t RevolverOperations::disable          { RevolverOperations::_disable          , " Disabling Revolver: "     };
-Operation_t RevolverOperations::rotateAbsolute   { RevolverOperations::_rotateAbsolute   , " Rotate Revolver: "        };
-Operation_t RevolverOperations::rotateToNext     { RevolverOperations::_rotateToNext     , " Rotate Revolver to next: "};
-Operation_t RevolverOperations::rotateToPrevious { RevolverOperations::_rotateToPrevious , " Rotate Revolver to next: "};
+Operation_t RevolverOperations::enable           { RevolverOperations::_enable           , "Enable Revolver"        };
+Operation_t RevolverOperations::disable          { RevolverOperations::_disable          , "Disable Revolver"       };
+Operation_t RevolverOperations::rotateAbsolute   { RevolverOperations::_rotateAbsolute   , "Rotate Revolver: X"     };
+Operation_t RevolverOperations::rotateToNext     { RevolverOperations::_rotateToNext     , "Rotate Revolver to next"};
+Operation_t RevolverOperations::rotateToPrevious { RevolverOperations::_rotateToPrevious , "Rotate Revolver to next"};
 
 
 void RevolverOperations::_enable(InstrumentVariant& _revolver, int msg) {
@@ -109,7 +109,7 @@ void RevolverOperations::_rotateToPrevious(InstrumentVariant& _revolver, int n_s
 }
 
 // -- PUMP -- //
-Operation_t PumpOperations::setSpeed { PumpOperations::_setSpeed, " Setting speed of Pump: "};
+Operation_t PumpOperations::setSpeed { PumpOperations::_setSpeed, "Set Pump speed: X"};
 
 void PumpOperations::_setSpeed(InstrumentVariant& _pump, int speed) {
 
@@ -127,7 +127,7 @@ void PumpOperations::_setSpeed(InstrumentVariant& _pump, int speed) {
 }
 
 // -- MOTOR STIRRER -- //
-Operation_t MotorStirrerOperations::setSpeed { MotorStirrerOperations::_setSpeed, " Setting speed of Motor Stirrer: "};
+Operation_t MotorStirrerOperations::setSpeed { MotorStirrerOperations::_setSpeed, "Setting Motor Stirrer Speed: X"};
 
 void MotorStirrerOperations::_setSpeed(InstrumentVariant& _motorStirrer, int speed) {
 
@@ -146,10 +146,16 @@ void MotorStirrerOperations::_setSpeed(InstrumentVariant& _motorStirrer, int spe
 
 // -- SLEEP -- //
 
-Operation_t SleepOperation::sleep        {SleepOperation::_sleep, " "};
-Operation_t SleepOperation::sleepMinutes {SleepOperation::_sleepMinutes, " "};
+Operation_t SleepOperation::sleep        {SleepOperation::_sleep, "Delay: X"};
+Operation_t SleepOperation::sleepMinutes {SleepOperation::_sleepMinutes, "Delay minutes: X"};
 
 void SleepOperation::_sleep(InstrumentVariant& _time, int ms) {
+
+    #ifdef DEBUG_DELAY_FLAG
+    Serial.print("[DEBUG] {delay} Wait for ");
+    Serial.print(ms);
+    Serial.println(" ms");
+    #endif
 
     delay(ms);
 
@@ -158,6 +164,12 @@ void SleepOperation::_sleep(InstrumentVariant& _time, int ms) {
 void SleepOperation::_sleepMinutes(InstrumentVariant& _time, int32_t minutes) {
 
     int64_t total_time_ticks = minutes * 60 * 1000 / portTICK_PERIOD_MS ;
+
+    #ifdef DEBUG_DELAY_FLAG
+    Serial.print("[DEBUG] {delayMinutes} Wait for ");
+    Serial.print(minutes);
+    Serial.println(" minutes");
+    #endif
 
     while (total_time_ticks > portMAX_DELAY) {
 

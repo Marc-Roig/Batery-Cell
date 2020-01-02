@@ -1,9 +1,6 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-//Define Firebase Data object
-//extern FirebaseData firebaseData;
-
 // SEQUENCES
 std::map<std::string, Sequence> sequences;
 

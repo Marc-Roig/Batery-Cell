@@ -22,10 +22,10 @@ public:
 
     static std::map<std::string, InstrumentVariant> instruments;
 
-    std::vector<const char*> names_list;
-    std::vector<Operation_t> callbacks_list;
-    std::vector<int> msgs_list;
-    String fireBaseId = "";
+    std::vector<const char*> names_list;    // instrument names
+    std::vector<Operation_t> callbacks_list; // operation callbacks
+    std::vector<int> msgs_list; // content to send to each operation callback
+    String fireBaseId = ""; // Needed to update sequence status in fireBase
 
     int sequence_idx = 0;
 

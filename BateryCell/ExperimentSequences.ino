@@ -21,4 +21,3 @@ void executeSequence(int, char* sequenceName) {
     }
 
 }
-

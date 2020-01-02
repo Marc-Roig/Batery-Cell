@@ -94,3 +94,38 @@ void FirebaseOperation::setOperationAsFailed(String firebase_id, int operation_i
     }
 
 }
+
+
+void FirebaseOperation::uploadSequence(const Sequence& seq, const char *seq_name) {
+
+    FirebaseJson json;
+    FirebaseJsonArray arr;
+
+    Serial.println("[INFO] Uploading sequence to firebase: ");
+
+    // Iterate over sequence to get the operation names
+    for (int i = 0; i < seq.size(); i++) {
+
+        // Name of the instrument: [R]
+        String operation_name = String("[") + seq.names_list[i] + "]";
+        // Operation
+        operation_name += String(" ") + seq.callbacks_list[i].second;
+        // If operation ends with X, replace it with the operation value (delay X -> delay 2)
+        if (operation_name.endsWith("X")) {
+            // Remove X
+            operation_name.remove(operation_name.length() - 1, 1);
+            operation_name.concat(seq.msgs_list[i]);
+        }
+        arr.add(operation_name);
+
+    }
+
+    json.add("operations", arr);
+
+    String jsonStr;
+    json.toString(jsonStr, true);
+    Serial.println(jsonStr);
+
+    Firebase.updateNode(firebaseData, seq_name, json);
+
+}

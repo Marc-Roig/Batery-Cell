@@ -1,6 +1,12 @@
 #ifndef TESTS_H
 #define TESTS_H
 
+//#define DEBUG_VALVE_FLAG
+//#define DEBUG_PUMP_FLAG
+//#define DEBUG_REVOLVER_FLAG
+//#define DEBUG_DELAY_FLAG
+
+
 class WebSocketsClientMock {
 
 private:

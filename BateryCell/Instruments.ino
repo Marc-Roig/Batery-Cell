@@ -9,11 +9,25 @@ Valve::Valve(int _pinValve, int init_state=0) {
 }
 
 void Valve::open() {
+
+    #ifdef DEBUG_VALVE_FLAG
+    Serial.print("[DEBUG] {Valve} Opening Valve. PIN: ");
+    Serial.println(pinValve);
+    #endif
+
     digitalWrite(pinValve, LOW);
+
 }
 
 void Valve::close() {
+
+    #ifdef DEBUG_VALVE_FLAG
+    Serial.print("[DEBUG] {Valve} Closing Valve. PIN: ");
+    Serial.println(pinValve);
+    #endif
+
     digitalWrite(pinValve, HIGH);
+
 }
 
 // -- MOTOR STIRRER -- //
@@ -38,17 +52,17 @@ void MotorStirrer::setSpeed(int new_speed) {
 
     if (speed < MIN_START_SPEED && new_speed < MIN_START_SPEED && new_speed != 0 )
         rampDown(new_speed);
-    
+
     speed = new_speed;
     ledcWrite(channel, speed);
-    
+
 
 }
 
 // -- REVOLVER -- //
 
-Revolver::Revolver(int _stepPin, int _dirPin, int _enablePin, int _nSlots, int _microsteps) : 
-    stepPin(_stepPin), dirPin(_dirPin), enablePin(_enablePin), nSlots(_nSlots)    
+Revolver::Revolver(int _stepPin, int _dirPin, int _enablePin, int _nSlots, int _microsteps) :
+    stepPin(_stepPin), dirPin(_dirPin), enablePin(_enablePin), nSlots(_nSlots)
 {
 
     pinMode(enablePin, OUTPUT);
@@ -62,7 +76,7 @@ Revolver::Revolver(int _stepPin, int _dirPin, int _enablePin, int _nSlots, int _
 
     float degreesPerSlot = 360 / nSlots;
     float degreePerStep = 1.8 / _microsteps;
-    stepsPerSlot = degreesPerSlot / degreePerStep; 
+    stepsPerSlot = degreesPerSlot / degreePerStep;
 
 }
 
@@ -83,12 +97,12 @@ void Revolver::rotate(int n_slots) {
     int stepsToMove;
 
     if (n_slots < 0) {
-    
+
         stepsToMove = -n_slots * stepsPerSlot;
         digitalWrite(dirPin, LOW);
-    
+
     } else {
-    
+
         stepsToMove = n_slots * stepsPerSlot;
         digitalWrite(dirPin, HIGH);
 
@@ -103,24 +117,26 @@ void Revolver::rotate(int n_slots) {
 
     }
 
-    // Update current slot
-//    currentSlot = (currentSlot + n_slots) % nSlots;
-//    if (currentSlot < 0) currentSlot = nSlots - currentSlot;
-
 }
 
 void Revolver::rotateToNext(uint n_slots) {
 
-//    Serial.print("--> Current Slot: ");
-//    Serial.println(currentSlot);
-//    Serial.print("--> Slots To Move: ");
-//    Serial.println(1);
+    // DEBUG
+    #ifdef DEBUG_REVOLVER_FLAG
+    Serial.print("[DEBUG] {Revolver} Current Slot: ");
+    Serial.print(currentSlot);
+    Serial.print(", Slots To Move: ");
+    Serial.print(1);
+    #endif
 
     rotate(1);
 
     setCurrentSlot(currentSlot + 1);
-//    Serial.print("--> Updated Slot Position: ");
-//    Serial.println(currentSlot);
+    // DEBUG
+    #ifdef DEBUG_REVOLVER_FLAG
+    Serial.print(", Updated Slot Position: ");
+    Serial.println(currentSlot);
+    #endif
 
     // @TODO: Update to FireBase
 
@@ -128,16 +144,23 @@ void Revolver::rotateToNext(uint n_slots) {
 
 void Revolver::rotateToPrevious(uint n_slots) {
 
-//    Serial.print("--> Current Slot: ");
-//    Serial.println(currentSlot);
-//    Serial.print("--> Slots To Move: ");
-//    Serial.println(-1);
+    // DEBUG
+    #ifdef DEBUG_REVOLVER_FLAG
+    Serial.print("[DEBUG] {Revolver} Current Slot: ");
+    Serial.print(currentSlot);
+    Serial.print(", Slots To Move: ");
+    Serial.print(-1);
+    #endif
 
     rotate(-1);
 
     setCurrentSlot(currentSlot - 1);
-//    Serial.print("--> Updated Slot Position: ");
-//    Serial.println(currentSlot);
+
+    // DEBUG
+    #ifdef DEBUG_REVOLVER_FLAG
+    Serial.print(", Updated Slot Position: ");
+    Serial.println(currentSlot);
+    #endif
 
     // @TODO: Update to FireBase
 
@@ -148,19 +171,30 @@ void Revolver::rotateAbsolute(uint slot) {
     slot = slot % nSlots;
 
     int slotsToMove = ((int)slot) - currentSlot;
-//    Serial.print("--> Slots To Move: ");
-//    Serial.println(slotsToMove);
-//    Serial.print("--> Current Slot: ");
-//    Serial.println(currentSlot);
-//    Serial.print("--> Absolute Slot to Move: ");
-//    Serial.println(slot);
-    rotate(slotsToMove);
 
+    // DEBUG
+    #ifdef DEBUG_REVOLVER_FLAG
+    Serial.print("[DEBUG] {Revolver} Slots To Move: ");
+    Serial.print(slotsToMove);
+    Serial.print(", Current Slot: ");
+    Serial.print(currentSlot);
+    Serial.print(", Absolute Slot to Move: ");
+    Serial.println(slot);
+    #endif
+
+    // Rotate revolver
+    rotate(slotsToMove);
+    // Update slot value
     setCurrentSlot(slot);
-//    Serial.print("--> Updated Slot Position: ");
-//    Serial.println(currentSlot);
-//    Serial.println("---");
-//    Serial.println(nSlots);
+
+    // DEBUG
+    #ifdef DEBUG_REVOLVER_FLAG
+    Serial.print(", Updated Slot: ");
+    Serial.print(currentSlot);
+    Serial.print(", NSlots: ");
+    Serial.println(nSlots);
+    #endif
+
 }
 
 void Revolver::setCurrentSlot(int newSlot) {
@@ -192,7 +226,22 @@ Pump::Pump(int _pinA, int _pinB) {
 
 void Pump::setSpeed(int speed) {
 
-    if (speed == 0) digitalWrite(pinA, LOW);
-    else digitalWrite(pinA, HIGH);
+    if (speed == 0) {
+        digitalWrite(pinA, LOW);
+
+        #ifdef DEBUG_PUMP_FLAG
+        Serial.print("[DEBUG] {Pump} Turning off Pump. PIN: ");
+        Serial.println(pinA);
+        #endif
+    }
+    else {
+        digitalWrite(pinA, HIGH);
+
+        #ifdef DEBUG_PUMP_FLAG
+        Serial.print("[DEBUG] {Pump} Turning on Pump. PIN: ");
+        Serial.println(pinA);
+        #endif
+
+    }
 
 }
