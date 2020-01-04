@@ -1,5 +1,0 @@
-
-
-class WindowsNotFound(Exception):
-    pass
-
