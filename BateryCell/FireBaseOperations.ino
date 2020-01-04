@@ -101,6 +101,8 @@ void FirebaseOperation::uploadSequence(const Sequence& seq, const char *seq_name
     FirebaseJson json;
     FirebaseJsonArray arr;
 
+    String firebasePath = String("sequences/") + seq_name;
+
     Serial.println("[INFO] Uploading sequence to firebase: ");
 
     // Iterate over sequence to get the operation names
@@ -126,6 +128,6 @@ void FirebaseOperation::uploadSequence(const Sequence& seq, const char *seq_name
     json.toString(jsonStr, true);
     Serial.println(jsonStr);
 
-    Firebase.updateNode(firebaseData, seq_name, json);
+    Firebase.updateNode(firebaseData, firebasePath, json);
 
 }

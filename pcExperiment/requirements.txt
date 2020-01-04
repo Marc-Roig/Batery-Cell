@@ -1,0 +1,6 @@
+websockets==8.1
+pytest==5.3.2
+pynput==1.6.3
+numpy==1.18.0
+pywinauto==0.6.8
+asynctest==0.13.0

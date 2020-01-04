@@ -35,34 +35,34 @@ void setup() {
     // Wait time to let everything run
     delay(500);
 
-    test();
+//    test();
 
 }
 
 
 void loop() {
 
-//    // Receive the commands from server
-//    if (wsQueueStartSequence != 0) {
-//        WSMessage wsMessage;
-//        if (xQueueReceive(wsQueueStartSequence, &(wsMessage), portMAX_DELAY) == pdPASS) {
-//
-//            Serial.print("[INFO] Executing sequence: ");
-//            Serial.println(wsMessage.content);
-//
-//            // Get sequence from it's name
-//            Sequence sequence = sequences[wsMessage.content];
-//
-//            // Set sequence fireBase id to update operations status
-//            String exp_id = String(wsMessage.type);
-//            sequence.setFireBaseId(exp_id);
-//
-//            // Execute sequence
-//            sequence.executeAll();
-//
-//        } else {
-//            Serial.println("[ERROR] Failed to Receive QueueStartSequence message");
-//        }
-//    }
+    // Receive the commands from server
+    if (wsQueueStartSequence != 0) {
+        WSMessage wsMessage;
+        if (xQueueReceive(wsQueueStartSequence, &(wsMessage), portMAX_DELAY) == pdPASS) {
+
+            Serial.print("[INFO] Executing sequence: ");
+            Serial.println(wsMessage.content);
+
+            // Get sequence from it's name
+            Sequence sequence = sequences[wsMessage.content];
+
+            // Set sequence fireBase id to update operations status
+            String exp_id = String(wsMessage.type);
+            sequence.setFireBaseId(exp_id);
+
+            // Execute sequence
+            sequence.executeAll();
+
+        } else {
+            Serial.println("[ERROR] Failed to Receive QueueStartSequence message");
+        }
+    }
 
 }

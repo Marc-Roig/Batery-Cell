@@ -1,0 +1,10 @@
+setup.py
+battery_experiment/__init__.py
+battery_experiment/basic_ws.py
+battery_experiment/globals.py
+battery_experiment/main.py
+battery_experiment/mouse_operations.py
+battery_experiment.egg-info/PKG-INFO
+battery_experiment.egg-info/SOURCES.txt
+battery_experiment.egg-info/dependency_links.txt
+battery_experiment.egg-info/top_level.txt

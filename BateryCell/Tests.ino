@@ -98,6 +98,10 @@ void create_normal_sequence() {
     normSeq.add("WebSocket", WS_START_EXPERIMENT);
     normSeq.add("WebSocket", WS_DEBUG_END_OF_OPERATION); // Simulate server ok response for the next element of seq.
     normSeq.add("WebSocket", WS_STOP_EXPERIMENT);
+    normSeq.add("WebSocket", WS_DEBUG_END_OF_OPERATION); // Simulate server ok response for the next element of seq.
+    normSeq.add("WebSocket", WS_START_MEASUREMENTS);
+    normSeq.add("WebSocket", WS_DEBUG_END_OF_OPERATION); // Simulate server ok response for the next element of seq.
+    normSeq.add("WebSocket", WS_STOP_MEASUREMENTS);
     normSeq.addDelay(1000); // Give time to process the last element of seq. before ending sequence
     normSeq.add("WebSocket", WS_END_OF_SEQUENCE);
     storeNewSequence(normSeq, "normal_operation");
@@ -151,19 +155,19 @@ void testReceiveStartSequence() {
 
 void test() {
 
+    // -- Test instruments
     create_clean_sequence();
-    const Sequence seq =  sequences["clean_operation"];
+    testReceiveStartSequence();
 
+    // -- Upload sequence to firebase
+    const Sequence seq =  sequences["clean_operation"];
     FirebaseOperation::uploadSequence(seq, "clean_operation");
 
-    //    testReceiveStartSequence();
-
     // -- Test sending WS Message
-//    Serial.println("[TEST] Sequence WS start experiment");
-//    create_normal_sequence();
-//    Sequence sequence = sequences["normal_operation"];
-
-//    sequence.executeAll();
+    Serial.println("[TEST] Sequence WS start experiment");
+    create_normal_sequence();
+    Sequence sequence = sequences["normal_operation"];
+    sequence.executeAll();
 
 
 }

@@ -218,12 +218,11 @@ void handleWsMessage(uint8_t * payload, size_t length, uint8_t verbose /*=0*/) {
     deserializeJson(doc, payload, length);
 
     // Check which command has been received
-//    const char* type = doc["type"];
     String type = doc["type"];
 
     // Call callback function associated with this command
-    // @TODO: FIND OR CREATE LIST OF WEBSOCKET CALLBACKS
-    if (type == "sequence_start") handleWsStartSequenceMessage(doc, verbose);
+    // @TODO: CREATE MAP OF WEBSOCKET CALLBACKS
     // Sequence start
+    if (type == "sequence_start") handleWsStartSequenceMessage(doc, verbose);
     // failed_operation (not yet)
 }
