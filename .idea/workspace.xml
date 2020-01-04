@@ -8,14 +8,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="638f5beb-33fc-4df5-aaa3-feb97b6b3a01" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pcExperiment/SETUP.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pcExperiment/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Batery-Cell.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Batery-Cell.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BateryCell/BateryCell.ino" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/BateryCell.ino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BateryCell/Core0.ino" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/Core0.ino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BateryCell/FireBaseOperations.ino" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/FireBaseOperations.ino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BateryCell/Tests.ino" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/Tests.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pcExperiment/battery_experiment.egg-info/PKG-INFO" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pcExperiment/battery_experiment.egg-info/SOURCES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pcExperiment/battery_experiment.egg-info/dependency_links.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pcExperiment/battery_experiment.egg-info/top_level.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,6 +112,7 @@
       <workItem from="1577951176822" duration="6516000" />
       <workItem from="1577961637525" duration="1954000" />
       <workItem from="1578153435980" duration="30000" />
+      <workItem from="1578153613730" duration="177000" />
     </task>
     <servers />
   </component>
@@ -133,11 +132,11 @@
       <screen x="67" y="27" width="3773" height="2133" />
     </state>
     <state x="1444" y="1101" key="SettingsEditor/67.27.3773.2133/3840.0.1920.1080@67.27.3773.2133" timestamp="1577966782202" />
-    <state x="1609" y="1293" key="com.intellij.ide.util.TipDialog" timestamp="1578153438202">
+    <state x="1609" y="1293" key="com.intellij.ide.util.TipDialog" timestamp="1578153614909">
       <screen x="67" y="27" width="3773" height="2133" />
     </state>
     <state x="1609" y="1293" key="com.intellij.ide.util.TipDialog/67.27.3773.2133/3840.0.1920.1080@67.27.3773.2133" timestamp="1577965656960" />
-    <state x="1609" y="1293" key="com.intellij.ide.util.TipDialog/67.27.3773.2133@67.27.3773.2133" timestamp="1578153438202" />
+    <state x="1609" y="1293" key="com.intellij.ide.util.TipDialog/67.27.3773.2133@67.27.3773.2133" timestamp="1578153614909" />
     <state x="1723" y="1386" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577961673417">
       <screen x="67" y="27" width="3773" height="2133" />
     </state>
