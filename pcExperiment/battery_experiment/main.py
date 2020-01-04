@@ -8,7 +8,7 @@ import logging
 import signal
 import functools
 
-from mouse import GuiRobot
+from battery_experiment.mouse import GuiRobot
 
 
 async def execute_operation(window_name: str, click_seq_path: str):

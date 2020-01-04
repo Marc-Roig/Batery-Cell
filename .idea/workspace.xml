@@ -8,12 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="638f5beb-33fc-4df5-aaa3-feb97b6b3a01" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pcExperiment/battery_experiment.egg-info/PKG-INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pcExperiment/battery_experiment.egg-info/SOURCES.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pcExperiment/battery_experiment.egg-info/dependency_links.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pcExperiment/battery_experiment.egg-info/top_level.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pcExperiment/battery_experiment/globals.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pcExperiment/battery_experiment/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/pcExperiment/battery_experiment/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +108,7 @@
       <workItem from="1577951176822" duration="6516000" />
       <workItem from="1577961637525" duration="1954000" />
       <workItem from="1578153435980" duration="30000" />
-      <workItem from="1578153613730" duration="177000" />
+      <workItem from="1578153613730" duration="227000" />
     </task>
     <servers />
   </component>
