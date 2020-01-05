@@ -7,10 +7,7 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="638f5beb-33fc-4df5-aaa3-feb97b6b3a01" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/pcExperiment/battery_experiment/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/pcExperiment/battery_experiment/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pcExperiment/battery_experiment/basic_ws.py" beforeDir="false" />
-    </list>
+    <list default="true" id="638f5beb-33fc-4df5-aaa3-feb97b6b3a01" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,22 +15,6 @@
   </component>
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>wsSignal</find>
-      <find>Confirmation</find>
-      <find>Received</find>
-      <find>strcmp</find>
-      <find>messages_map</find>
-      <find>REVOLVER</find>
-      <find>EPP</find>
-      <find>TIME_UNTIL_EMPTY</find>
-      <find>FirebaseData firebaseData</find>
-      <find>flag</find>
-      <find>Tests.h</find>
-      <find>Starting</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -108,7 +89,7 @@
       <workItem from="1577951176822" duration="6516000" />
       <workItem from="1577961637525" duration="1954000" />
       <workItem from="1578153435980" duration="30000" />
-      <workItem from="1578153613730" duration="352000" />
+      <workItem from="1578153613730" duration="480000" />
     </task>
     <servers />
   </component>
