@@ -9,11 +9,8 @@ std::map<int, String> Sequence::parameters;
 Sequence::Sequence(const Sequence& seq) {
 
     // Copy all elements of one sequence to this one
-    for (int i = 0; i < seq.size(); i++ ) {
-        names_list.push_back(seq.names_list[i]);
-        operations_list.push_back(seq.operations_list[i]);
-        msgs_list.push_back(seq.msgs_list[i]);
-    }
+    for (int i = 0; i < seq.size(); i++ )
+        this->pushOperationParams(seq.names_list[i], seq.operations_list[i], seq.msgs_list[i]);
 
     this->sequence_idx = seq.sequence_idx;
 
@@ -23,52 +20,30 @@ Sequence::Sequence(const Sequence& seq) {
 Sequence& Sequence::add(const char* instrument, Operation_t callback, int msg /* =0 */ ) {
 
     if (Sequence::instruments.count(instrument) > 0) {
-
         names_list.push_back(instrument);
-//        callbacks_list.push_back(callback);
         msgs_list.push_back(msg);
-
-    } else {
-        // std::cout << "[WARNING] Specified instrument ("<< instrument <<") in add Sequence method do not exist\n";
-        Serial.println("Specified instrument in add Sequence method do not exist");
     }
-
     return *this;
 
 }
 
 
-Sequence& Sequence::add(const char* instrument, std::string operation_name, int operation_value /* =0 */) {
+Sequence& Sequence::add(const char* instrument, const char* operation_name, int operation_param /* =0 */) {
 
-    if (Sequence::instruments.count(instrument) > 0) {
-
-        // TODO: check if it exists
-        names_list.push_back(instrument);
-        operations_list.push_back(operation_name);
-        msgs_list.push_back(operation_value);
-
-    } else {
-        Serial.println("[ERROR] Specified instrument in add Sequence method do not exist");
-    }
+    if (!this->pushOperationParams(instrument, operation_name, operation_param))
+        throw ("Could not set operations sequence");
 
     return *this;
 
 }
 
-Sequence& Sequence::addFbParam(const char *instrument, std::string operation_name, const char *firebase_param){
+Sequence& Sequence::addFbParam(const char *instrument, const char* operation_name, const char *firebase_param){
 
-    if (Sequence::instruments.count(instrument) > 0) {
+    if (!this->pushOperationParams(instrument, operation_name, -1))
+        throw ("Could not set operations sequence");
 
-        names_list.push_back(instrument);
-        operations_list.push_back(operation_name);
-        msgs_list.push_back(-1); // In the execution loop a -1 will represent the parameter has to be retrieved from fireBase
-
-        // Assign parameter name in the current sequence idx
-        parameters[this->size() - 1] = firebase_param;
-
-    } else {
-        Serial.println("[ERROR] Specified instrument in add Sequence method do not exist");
-    }
+    // Assign parameter name in the current sequence idx
+    parameters[this->size() - 1] = firebase_param;
 
     return *this;
 
@@ -101,7 +76,7 @@ Sequence& Sequence::update(const int& sequence_idx, Operation_t callback, int ms
 }
 
 
-Sequence& Sequence::update(const int& sequence_idx, std::string operation_name, int operation_value /* =0 */) {
+Sequence &Sequence::update(const int &sequence_idx, const char *operation_name, int operation_value /* =0 */) {
 
     operations_list[sequence_idx] = operation_name;
     msgs_list[sequence_idx] = operation_value;
@@ -166,22 +141,20 @@ int Sequence::execute(int idx) {
         InstrumentVariant& instrumentVariant = instruments.at(names_list[idx]);
 
         int param = this->getParameter(idx);
-        if (param == -1) {
-            FirebaseOperation::setOperationAsFailed(fireBaseId, idx);
+        if (param != -1) {
+
+            // Set start of operation timestamp
+            FirebaseOperation::setTimestampStart(fireBaseId, idx);
+
+            // Call callback function
+            auto callback = this->getCallback(idx);
+            callback(instrumentVariant, param);
+
+            // Update fireBase experiment document
+            FirebaseOperation::setOperationAsDone(fireBaseId, idx);
+
             return -1;
         }
-
-        // Set start of operation timestamp
-        FirebaseOperation::setTimestampStart(fireBaseId, idx);
-
-        // Call callback function
-        auto callback = this->getCallback(idx);
-        callback(instrumentVariant, param);
-
-        // Update fireBase experiment document
-        FirebaseOperation::setOperationAsDone(fireBaseId, idx);
-
-        return -1;
 
     }
 
@@ -223,7 +196,7 @@ String Sequence::list() {
     for (int i = 0; i < size(); i++) {
 
         seq += String(i); // Stringify number
-        seq += operations_list[i].c_str(); // Get string definition of the callback function stored in the tuple
+        seq += operations_list[i]; // Get string definition of the callback function stored in the tuple
         seq += names_list[i]; // Get the name of the instrument/operation
         seq += '\n';
 
@@ -234,6 +207,7 @@ String Sequence::list() {
 }
 
 Sequence::callback_t Sequence::getCallback(int idx) {
+
 
     auto operation_name = this->operations_list[idx];
     return callbacks.at(operation_name).first;
@@ -260,12 +234,37 @@ int Sequence::getParameter(int idx) {
 
 }
 
+int Sequence::pushOperationParams(const char *instrument, const char *operation_name, int operation_value) {
+
+    // Check instrument and operation are defined
+    if (Sequence::instruments.count(instrument)) {
+
+        if (Sequence::callbacks.count(operation_name)) {
+            names_list.push_back(instrument);
+            operations_list.push_back(operation_name);
+            msgs_list.push_back(operation_value);
+            return 0;
+        } else {
+            Serial.print("[ERROR] Operation name was not defined: ");
+            Serial.println(operation_name);
+        }
+
+    } else {
+        Serial.print("[ERROR] Instrument name was not defined: ");
+        Serial.println(instrument);
+    }
+
+    return -1;
+}
+
+
 template <class T>
 void Sequence::setNewInstrument(const char* name, T instrument) {
 
 	Sequence::instruments[name] = InstrumentVariant(instrument);
 
 }
+
 
 void Sequence::setNewOperation(std::string operation_name, Operation_t operation) {
 

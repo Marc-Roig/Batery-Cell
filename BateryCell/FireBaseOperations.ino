@@ -157,7 +157,7 @@ void FirebaseOperation::uploadSequence(const Sequence& seq, const char *seq_name
         // Name of the instrument: [R]
         String operation_name = String("[") + seq.names_list[i] + "]";
         // Operation
-        operation_name += String(" ") + seq.operations_list[i].c_str();
+        operation_name += String(" ") + seq.operations_list[i];
         // If operation ends with X, replace it with the operation value (delay X -> delay 2)
         if (operation_name.endsWith("X")) {
             // Remove X

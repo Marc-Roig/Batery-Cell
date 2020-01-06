@@ -31,10 +31,10 @@ public:
     // Map parameter name with idx of operation in the sequence
     static std::map<int, String> parameters;
 
-    std::vector<std::string> operations_list; // operation callbacks
-
     std::vector<const char*> names_list;    // instrument names
+    std::vector<const char*> operations_list; // operation callbacks
     std::vector<int> msgs_list; // content to send to each operation callback
+
     String fireBaseId = ""; // Needed to update sequence status in fireBase
 
     int sequence_idx = 0;
@@ -49,10 +49,10 @@ public:
     Sequence& add(const char* instrument, Operation_t callback, int msg = 0);
 
     // Add instrument operation to the sequence
-    Sequence& add(const char* instrument, std::string operation_name, int operation_value = 0);
+    Sequence& add(const char* instrument, const char* operation_name, int operation_value = 0);
 
     // Add instrument operation to sequence and parameter name to retrieve from fireBase
-    Sequence& addFbParam(const char* instrument, std::string operation_name, const char* firebase_param = "");
+    Sequence& addFbParam(const char* instrument, const char* operation_name, const char* firebase_param = "");
 
     // Append a new sequence
     Sequence& add(const Sequence& seq);
@@ -61,7 +61,7 @@ public:
     Sequence& update(const int& sequence_idx, Operation_t callback, int msg);
 
     // Update element of the sequence
-    Sequence& update(const int& sequence_idx, std::string operation_name, int operation_value = 0);
+    Sequence &update(const int &sequence_idx, const char *operation_name, int operation_value = 0);
 
     // Add ms delay in the sequence
     Sequence& addDelay(int ms);
@@ -91,27 +91,23 @@ public:
     // ----------- //
     // -- Utils -- //
     // ----------- //
-    // Get number of elements in the sequence
-    int size() const { return msgs_list.size(); }
 
-    // List all the elements of the sequence into a string
-    String list();
+    int size() const { return msgs_list.size(); } // Get number of elements in the sequence
+    String list(); // List all the elements of the sequence into a string
 
-    // Get callback from sequence idx
-    callback_t getCallback(int idx);
+    callback_t getCallback(int idx); // Get callback from sequence idx
+    int getParameter(int idx); // Get operation parameter
 
-    // Get operation parameter
-    int getParameter(int idx);
+    // Insert operation instrument name, callback name and param
+    int pushOperationParams(const char* instrument, const char* operation_name, int operation_value);
 
     // ---------------------------------------- //
     // -- Instrument - Operation definitions -- //
     // ---------------------------------------- //
-    // Introduce new instrument into the std map
-    template <class T>
-    static void setNewInstrument(const char*, T instrument);
 
-    // Introduce new operation into the std map
-    static void setNewOperation(std::string operation_name, Operation_t operation);
+    template <class T>
+    static void setNewInstrument(const char*, T instrument); // Introduce new instrument into the std map
+    static void setNewOperation(std::string operation_name, Operation_t operation); // Introduce new operation into the std map
 
     // --------------- //
     // -- Operators -- //

@@ -8,16 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="638f5beb-33fc-4df5-aaa3-feb97b6b3a01" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BateryCell/BateryCell.ino" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/BateryCell.ino" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BateryCell/FireBaseOperations.ino" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/FireBaseOperations.ino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BateryCell/FirebaseOperations.h" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/FirebaseOperations.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BateryCell/HelperDefines.h" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/HelperDefines.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BateryCell/Sequence.h" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/Sequence.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BateryCell/Sequence.ino" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/Sequence.ino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BateryCell/Tests.ino" beforeDir="false" afterPath="$PROJECT_DIR$/BateryCell/Tests.ino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/experiments.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/experiments.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/sequences.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/sequences.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,8 +39,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/BateryCell/Tests.ino">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="189">
-                  <caret line="108" column="9" selection-start-line="108" selection-start-column="9" selection-end-line="119" selection-end-column="13" />
+                <state relative-caret-position="609">
+                  <caret line="113" column="37" selection-start-line="113" selection-start-column="37" selection-end-line="113" selection-end-column="37" />
                 </state>
               </provider>
             </entry>
@@ -79,9 +72,9 @@
             <entry file="file://$PROJECT_DIR$/BateryCell/Sequence.ino">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="-1146">
-                  <caret line="46" column="48" selection-start-line="46" selection-start-column="48" selection-end-line="46" selection-end-column="48" />
-                  <caret line="62" column="48" selection-start-line="62" selection-start-column="48" selection-end-line="62" selection-end-column="48" />
-                  <caret line="105" column="50" selection-start-line="105" selection-start-column="50" selection-end-line="105" selection-end-column="50" />
+                  <caret line="35" selection-start-line="35" selection-end-line="35" />
+                  <caret line="47" column="17" selection-start-line="47" selection-start-column="17" selection-end-line="47" selection-end-column="17" />
+                  <caret line="80" column="50" selection-start-line="80" selection-start-column="50" selection-end-line="80" selection-end-column="50" />
                 </state>
               </provider>
             </entry>
@@ -104,8 +97,8 @@
               <file pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/BateryCell/Sequence.ino">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="807">
-                      <caret line="258" column="17" selection-start-line="258" selection-start-column="17" selection-end-line="258" selection-end-column="17" />
+                    <state relative-caret-position="367">
+                      <caret line="189" column="2" selection-start-line="189" selection-start-column="2" selection-end-line="189" selection-end-column="2" />
                       <folding>
                         <element signature="e#2805#2895#0" />
                       </folding>
@@ -125,8 +118,8 @@
               <file pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/BateryCell/FireBaseOperations.ino">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="1480">
-                      <caret line="169" selection-start-line="169" selection-end-line="169" />
+                    <state relative-caret-position="481">
+                      <caret line="159" column="62" selection-start-line="159" selection-start-column="62" selection-end-line="159" selection-end-column="62" />
                     </state>
                   </provider>
                 </entry>
@@ -144,8 +137,20 @@
                 <entry file="file://$PROJECT_DIR$/docs/sequences.md">
                   <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
                     <state split_layout="FIRST">
-                      <first_editor relative-caret-position="567">
-                        <caret line="27" column="47" lean-forward="true" selection-start-line="27" selection-start-column="47" selection-end-line="27" selection-end-column="47" />
+                      <first_editor relative-caret-position="532">
+                        <caret line="33" column="19" lean-forward="true" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
+                      </first_editor>
+                      <second_editor />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/docs/experiments.md">
+                  <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+                    <state split_layout="FIRST">
+                      <first_editor relative-caret-position="700">
+                        <caret line="41" column="42" lean-forward="true" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
                       </first_editor>
                       <second_editor />
                     </state>
@@ -159,8 +164,8 @@
               <file pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/BateryCell/Sequence.h">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="630">
-                      <caret line="72" column="31" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
+                    <state relative-caret-position="-201">
+                      <caret line="63" column="99" selection-start-line="63" selection-start-column="99" selection-end-line="63" selection-end-column="99" />
                     </state>
                   </provider>
                 </entry>
@@ -168,8 +173,9 @@
               <file pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/BateryCell/Sequence.ino">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="521">
-                      <caret line="235" column="10" selection-start-line="235" selection-start-column="10" selection-end-line="235" selection-end-column="10" />
+                    <state relative-caret-position="819">
+                      <caret line="30" column="59" selection-start-line="30" selection-start-column="59" selection-end-line="30" selection-end-column="59" />
+                      <caret line="39" column="66" selection-start-line="39" selection-start-column="66" selection-end-line="39" selection-end-column="66" />
                     </state>
                   </provider>
                 </entry>
@@ -191,6 +197,8 @@
       <find>48</find>
       <find>callbacks</find>
       <find>::size</find>
+      <find>c_</find>
+      <find>c_str</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -334,12 +342,12 @@
       <workItem from="1578153435980" duration="30000" />
       <workItem from="1578153613730" duration="480000" />
       <workItem from="1578244994339" duration="5390000" />
-      <workItem from="1578299933604" duration="21360000" />
+      <workItem from="1578299933604" duration="24760000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12928000" />
+    <option name="totallyTimeSpent" value="16328000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="812" width="3765" height="1344" extended-state="0" />
@@ -347,7 +355,7 @@
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.12879807" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.12879807" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Terminal" weight="0.3085905" />
@@ -411,16 +419,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/docs/sequences.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="567">
-            <caret line="27" column="47" lean-forward="true" selection-start-line="27" selection-start-column="47" selection-end-line="27" selection-end-column="47" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BateryCell/main.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -432,16 +430,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="5" column="20" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/experiments.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="574">
-            <caret line="53" column="66" selection-start-line="53" selection-start-column="66" selection-end-line="53" selection-end-column="66" />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -488,8 +476,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BateryCell/Tests.ino">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="108" column="9" selection-start-line="108" selection-start-column="9" selection-end-line="119" selection-end-column="13" />
+        <state relative-caret-position="609">
+          <caret line="113" column="37" selection-start-line="113" selection-start-column="37" selection-end-line="113" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/sequences.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="532">
+            <caret line="33" column="19" lean-forward="true" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/experiments.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="700">
+            <caret line="41" column="42" lean-forward="true" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BateryCell/FireBaseOperations.ino">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="159" column="62" selection-start-line="159" selection-start-column="62" selection-end-line="159" selection-end-column="62" />
         </state>
       </provider>
     </entry>
@@ -500,24 +515,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BateryCell/FireBaseOperations.ino">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1480">
-          <caret line="169" selection-start-line="169" selection-end-line="169" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BateryCell/Sequence.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="72" column="31" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
+        <state relative-caret-position="-201">
+          <caret line="63" column="99" selection-start-line="63" selection-start-column="99" selection-end-line="63" selection-end-column="99" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BateryCell/Sequence.ino">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="807">
-          <caret line="258" column="17" selection-start-line="258" selection-start-column="17" selection-end-line="258" selection-end-column="17" />
+        <state relative-caret-position="367">
+          <caret line="189" column="2" selection-start-line="189" selection-start-column="2" selection-end-line="189" selection-end-column="2" />
           <folding>
             <element signature="e#2805#2895#0" />
           </folding>
