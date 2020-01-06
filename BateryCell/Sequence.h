@@ -28,8 +28,9 @@ public:
     static std::map<std::string, InstrumentVariant> instruments;
     // Map operation name with the callback
     static std::map<std::string, Operation_t> callbacks;
+
     // Map parameter name with idx of operation in the sequence
-    static std::map<int, String> parameters;
+    std::map<int, String> parameters;
 
     std::vector<const char*> names_list;    // instrument names
     std::vector<const char*> operations_list; // operation callbacks
@@ -45,9 +46,6 @@ public:
     Sequence(const Sequence& seq);
 
     // -- Operation addition -- //
-    // Add instrument operation to the sequence
-    Sequence& add(const char* instrument, Operation_t callback, int msg = 0);
-
     // Add instrument operation to the sequence
     Sequence& add(const char* instrument, const char* operation_name, int operation_value = 0);
 

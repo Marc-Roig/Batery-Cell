@@ -3,7 +3,6 @@
 // Called to tell the compiler to reserve storage for this
 std::map<std::string, InstrumentVariant> Sequence::instruments;
 std::map<std::string, Operation_t> Sequence::callbacks;
-std::map<int, String> Sequence::parameters;
 
 // Copy from another sequence constructor
 Sequence::Sequence(const Sequence& seq) {
@@ -12,21 +11,10 @@ Sequence::Sequence(const Sequence& seq) {
     for (int i = 0; i < seq.size(); i++ )
         this->pushOperationParams(seq.names_list[i], seq.operations_list[i], seq.msgs_list[i]);
 
+    this->parameters = seq.parameters;
     this->sequence_idx = seq.sequence_idx;
 
 }
-
-// TODO: Remove
-Sequence& Sequence::add(const char* instrument, Operation_t callback, int msg /* =0 */ ) {
-
-    if (Sequence::instruments.count(instrument) > 0) {
-        names_list.push_back(instrument);
-        msgs_list.push_back(msg);
-    }
-    return *this;
-
-}
-
 
 Sequence& Sequence::add(const char* instrument, const char* operation_name, int operation_param /* =0 */) {
 
@@ -50,16 +38,12 @@ Sequence& Sequence::addFbParam(const char *instrument, const char* operation_nam
 }
 
 
-// TODO: Remove
 Sequence& Sequence::add(const Sequence& seq) {
 
-    for (int i = 0; i < seq.size(); i++ ) {
+    for (int i = 0; i < seq.size(); i++ )
+        this->pushOperationParams(seq.names_list[i], seq.operations_list[i], seq.msgs_list[i]);
 
-        names_list.push_back(seq.names_list[i]);
-//        callbacks_list.push_back(seq.callbacks_list[i]);
-        msgs_list.push_back(seq.msgs_list[i]);
-
-    }
+    this->parameters = seq.parameters;
 
     return *this;
 
@@ -94,9 +78,7 @@ Sequence& Sequence::addDelay(int ms) {
         operations_list.push_back("TIME_DELAY_MS");
         msgs_list.push_back(ms);
 
-
     }
-
 
     return *this;
 
@@ -283,8 +265,6 @@ Sequence& Sequence::operator=(const Sequence& seq) {
         msgs_list.push_back(seq.msgs_list[i]);
 
     }
-
-    this->sequence_idx = seq.sequence_idx;
 
     return *this;
 }
