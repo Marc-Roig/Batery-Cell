@@ -2,6 +2,7 @@
 #ifndef HELPERDEFINES_H
 #define HELPERDEFINES_H
 
+// TODO: Remove
 
 #define OPEN_VALVE ValveOperations::open
 #define CLOSE_VALVE ValveOperations::close
@@ -16,7 +17,7 @@
 
 #define MOTORSTIRRER_SET_SPEED MotorStirrerOperations::setSpeed
 
-#define WS_START_EXPERIMENT WebsocketOperation::startExperiment 
+#define WS_START_EXPERIMENT WebsocketOperation::startExperiment
 #define WS_START_MEASUREMENTS WebsocketOperation::startMeasurements
 #define WS_STOP_EXPERIMENT WebsocketOperation::stopExperiment
 #define WS_STOP_MEASUREMENTS WebsocketOperation::stopMeasurements

@@ -17,13 +17,23 @@
 // - B: The callback function to call and execute
 // - C: The message (such as, 3seconds)
 class Sequence {
-
 public:
 
+    // --------------- //
+    // -- Variables -- //
+    // --------------- //
+    typedef void (*callback_t)(InstrumentVariant&, int);
+
+    // Map instrument name with its variant
     static std::map<std::string, InstrumentVariant> instruments;
+    // Map operation name with the callback
+    static std::map<std::string, Operation_t> callbacks;
+    // Map parameter name with idx of operation in the sequence
+    static std::map<int, String> parameters;
+
+    std::vector<std::string> operations_list; // operation callbacks
 
     std::vector<const char*> names_list;    // instrument names
-    std::vector<Operation_t> callbacks_list; // operation callbacks
     std::vector<int> msgs_list; // content to send to each operation callback
     String fireBaseId = ""; // Needed to update sequence status in fireBase
 
@@ -34,8 +44,15 @@ public:
     // Copy from another sequence constructor
     Sequence(const Sequence& seq);
 
+    // -- Operation addition -- //
     // Add instrument operation to the sequence
     Sequence& add(const char* instrument, Operation_t callback, int msg = 0);
+
+    // Add instrument operation to the sequence
+    Sequence& add(const char* instrument, std::string operation_name, int operation_value = 0);
+
+    // Add instrument operation to sequence and parameter name to retrieve from fireBase
+    Sequence& addFbParam(const char* instrument, std::string operation_name, const char* firebase_param = "");
 
     // Append a new sequence
     Sequence& add(const Sequence& seq);
@@ -43,8 +60,17 @@ public:
     // Update element of the sequence
     Sequence& update(const int& sequence_idx, Operation_t callback, int msg);
 
+    // Update element of the sequence
+    Sequence& update(const int& sequence_idx, std::string operation_name, int operation_value = 0);
+
     // Add ms delay in the sequence
     Sequence& addDelay(int ms);
+
+    // Add ms delay in the sequence and retrieve value from fireBase
+    Sequence& addDelayFbParam(const char* firebase_param);
+
+    // Add min delay in the sequence and retrieve value from fireBase
+    Sequence& addDelayMinutesFbParam(int min);
 
     // Add min delay in the sequence
     Sequence& addDelayMinutes(int min);
@@ -62,17 +88,34 @@ public:
     // Execute all operations in the sequence
     int executeAll();
 
+    // ----------- //
+    // -- Utils -- //
+    // ----------- //
     // Get number of elements in the sequence
     int size() const { return msgs_list.size(); }
 
     // List all the elements of the sequence into a string
     String list();
 
+    // Get callback from sequence idx
+    callback_t getCallback(int idx);
+
+    // Get operation parameter
+    int getParameter(int idx);
+
+    // ---------------------------------------- //
+    // -- Instrument - Operation definitions -- //
+    // ---------------------------------------- //
     // Introduce new instrument into the std map
     template <class T>
     static void setNewInstrument(const char*, T instrument);
 
+    // Introduce new operation into the std map
+    static void setNewOperation(std::string operation_name, Operation_t operation);
+
+    // --------------- //
     // -- Operators -- //
+    // --------------- //
     Sequence& operator=(const Sequence& seq);
 
 };

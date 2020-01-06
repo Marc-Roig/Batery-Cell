@@ -16,8 +16,8 @@ Each sequence will be stored in firebase in the sequences keys:
                     "instrument": null,
                     // (string) definition of the operation to execute. Example: "move_to"
                     "operation": null,
-                    // (int) Optional value, if null it's not used. Example: 10
-                    "value": null
+                    // (int) Optional parameter, if null it's not used. Example: 10
+                    "parameter": null
                 },
                 // ... 
             ],
@@ -37,14 +37,6 @@ Each sequence will be stored in firebase in the sequences keys:
                     "param_name": null
                 }
             },
-            // List of which eppendorfs where filled during the experiment
-            "eppendorfs_filled": [1, 2],
-            // (int) How many times the cell had been used without cleaning before the experiment
-            // Retrieve from the hardware document
-            "n_cell_usages": null,
-            // (datetime) How much time the cell had been used ...
-            // Retrieve from the hardware document
-            "time_cell_usages": null
         }   
     }
 }

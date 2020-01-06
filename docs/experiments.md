@@ -19,9 +19,9 @@ The document structure:
                     // Optional parameter of the operation, null if not used
                     "parameter": null,
                     // Updated by microcontroller when starts operation
-                    "startTime": "date",
+                    "startTime": "timestamp",
                     // Updated by microcontroller when ends operation
-                    "endTime": "date",
+                    "endTime": "timestamp",
                     // Status of operation. 0 for pending, 1 for success, 2 for failed
                     "status": 0
               },
@@ -42,7 +42,17 @@ The document structure:
               "experiment_time_min": null,
               // (float) percentage of bicarbonate solution
               "bicarbonate_concentration": null
-          } 
+          },
+          // List of which eppendorfs where filled during the experiment
+          "eppendorfs_filled": [1, 2],
+          // (int) How many times the cell had been used without cleaning before the experiment
+          // Retrieve from the hardware document
+          "n_cell_usages": null,
+          // (datetime) How much time the cell had been used ...
+          // Retrieve from the hardware document
+          "time_cell_usages": null,
+          // List of errors prompted during the sequence execution
+          "error_logs": []
       }
   }
 }

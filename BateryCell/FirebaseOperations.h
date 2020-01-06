@@ -15,9 +15,10 @@ public:
     static void setOperationAsPending(String firebase_id, int operation_idx);
     static void setOperationAsDone(String firebase_id, int operation_idx);
     static void setOperationAsFailed(String firebase_id, int operation_idx);
+    static void setTimestampStart(String firebase_id, int operation_idx);
 
-    // @TODO
+    static int getParamByName(String firebase_id, String param_name);
+
     static void uploadSequence(const Sequence& seq, const char *seq_name);
-
 };
 #endif //BATERY_CELL_FIREBASEOPERATIONS_H

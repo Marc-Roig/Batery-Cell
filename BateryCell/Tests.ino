@@ -76,35 +76,48 @@ void create_clean_sequence() {
 
 
     Sequence cleanSeq;
-    cleanSeq.add("R", REVOLVER_ENABLE)
-            .add("R", REVOLVER_ROTATE_TO_NEXT)
-            .add("R", REVOLVER_ROTATE_ABSOLUTE, 0)
-            .add("R", REVOLVER_ROTATE_TO_NEXT)
-            .add("R", REVOLVER_ROTATE_TO_PREVIOUS)
-            .add("R", REVOLVER_DISABLE)
-            .add("V5", OPEN_VALVE)
-            .add("V5", CLOSE_VALVE)
+
+    cleanSeq.add("R", "REVOLVER_ENABLE")
+            .add("R", "REVOLVER_ROTATE_TO_NEXT")
+            .addFbParam("R", "REVOLVER_ROTATE_ABSOLUTE", "voltage" /*FireBase param name*/)
+            .add("R", "REVOLVER_ROTATE_TO_NEXT")
+            .add("R", "REVOLVER_ROTATE_TO_PREVIOUS")
+            .add("R", "REVOLVER_DISABLE")
+            .add("V5", "OPEN_VALVE")
+            .add("V5", "CLOSE_VALVE")
             .addDelay(100)
-            .add("P", PUMP_SET_SPEED, PUMP_MAX_SPEED)
-            .add("P", PUMP_SET_SPEED, PUMP_STOP);
+            .add("P", "PUMP_SET_SPEED", PUMP_MAX_SPEED)
+            .add("P", "PUMP_SET_SPEED", PUMP_STOP);
+
+    //    cleanSeq.add("R", REVOLVER_ENABLE)
+//            .add("R", REVOLVER_ROTATE_TO_NEXT)
+//            .addFbParam("R", REVOLVER_ROTATE_ABSOLUTE, "voltage")
+//            .add("R", REVOLVER_ROTATE_TO_NEXT)
+//            .add("R", REVOLVER_ROTATE_TO_PREVIOUS)
+//            .add("R", REVOLVER_DISABLE)
+//            .add("V5", OPEN_VALVE)
+//            .add("V5", CLOSE_VALVE)
+//            .addDelay(100)
+//            .add("P", PUMP_SET_SPEED, PUMP_MAX_SPEED)
+//            .add("P", PUMP_SET_SPEED, PUMP_STOP);
     storeNewSequence(cleanSeq, "clean_operation");
 }
 
 void create_normal_sequence() {
 
 
-    Sequence normSeq;
-    normSeq.add("WebSocket", WS_DEBUG_END_OF_OPERATION); // Simulate server ok response for the next element of seq.
-    normSeq.add("WebSocket", WS_START_EXPERIMENT);
-    normSeq.add("WebSocket", WS_DEBUG_END_OF_OPERATION); // Simulate server ok response for the next element of seq.
-    normSeq.add("WebSocket", WS_STOP_EXPERIMENT);
-    normSeq.add("WebSocket", WS_DEBUG_END_OF_OPERATION); // Simulate server ok response for the next element of seq.
-    normSeq.add("WebSocket", WS_START_MEASUREMENTS);
-    normSeq.add("WebSocket", WS_DEBUG_END_OF_OPERATION); // Simulate server ok response for the next element of seq.
-    normSeq.add("WebSocket", WS_STOP_MEASUREMENTS);
-    normSeq.addDelay(1000); // Give time to process the last element of seq. before ending sequence
-    normSeq.add("WebSocket", WS_END_OF_SEQUENCE);
-    storeNewSequence(normSeq, "normal_operation");
+//    Sequence normSeq;
+//    normSeq.add("WebSocket", WS_DEBUG_END_OF_OPERATION); // Simulate server ok response for the next element of seq.
+//    normSeq.add("WebSocket", WS_START_EXPERIMENT);
+//    normSeq.add("WebSocket", WS_DEBUG_END_OF_OPERATION); // Simulate server ok response for the next element of seq.
+//    normSeq.add("WebSocket", WS_STOP_EXPERIMENT);
+//    normSeq.add("WebSocket", WS_DEBUG_END_OF_OPERATION); // Simulate server ok response for the next element of seq.
+//    normSeq.add("WebSocket", WS_START_MEASUREMENTS);
+//    normSeq.add("WebSocket", WS_DEBUG_END_OF_OPERATION); // Simulate server ok response for the next element of seq.
+//    normSeq.add("WebSocket", WS_STOP_MEASUREMENTS);
+//    normSeq.addDelay(1000); // Give time to process the last element of seq. before ending sequence
+//    normSeq.add("WebSocket", WS_END_OF_SEQUENCE);
+//    storeNewSequence(normSeq, "normal_operation");
 
 }
 
@@ -156,18 +169,17 @@ void testReceiveStartSequence() {
 void test() {
 
     // -- Test instruments
-    create_clean_sequence();
     testReceiveStartSequence();
 
     // -- Upload sequence to firebase
-    const Sequence seq =  sequences["clean_operation"];
-    FirebaseOperation::uploadSequence(seq, "clean_operation");
-
-    // -- Test sending WS Message
-    Serial.println("[TEST] Sequence WS start experiment");
-    create_normal_sequence();
-    Sequence sequence = sequences["normal_operation"];
-    sequence.executeAll();
+//    const Sequence seq =  sequences["clean_operation"];
+//    FirebaseOperation::uploadSequence(seq, "clean_operation");
+//
+//    // -- Test sending WS Message
+//    Serial.println("[TEST] Sequence WS start experiment");
+//    create_normal_sequence();
+//    Sequence sequence = sequences["normal_operation"];
+//    sequence.executeAll();
 
 
 }

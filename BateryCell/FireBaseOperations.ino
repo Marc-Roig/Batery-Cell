@@ -28,11 +28,13 @@ void FirebaseOperation::setOperationAsPending(String firebase_id, int operation_
     if (Firebase.pathExist(FirebaseOperation::firebaseData, operation_path)) {
         // Get path to update
         operation_path += "/content/actions/";
-        operation_path += (char) (operation_idx + 48); // Transform idx to char and append value to the path
-        operation_path += "/status";
+        operation_path += String(operation_idx); // Transform idx to char and append value to the path
+
+        // Update end timestamp
+        Firebase.setTimestamp(firebaseData, operation_path + "/endTime");
 
         // Update status
-        Firebase.setInt(firebaseData, operation_path, 0);
+        Firebase.setInt(firebaseData, operation_path + "/status", 0);
 
     } else {
         Serial.print("[ERROR] FireBase path does not exist: ");
@@ -50,17 +52,16 @@ void FirebaseOperation::setOperationAsDone(String firebase_id, int operation_idx
 
     String operation_path = "/" + firebase_id;
 
-    Serial.println(operation_path);
-
     if (Firebase.pathExist(FirebaseOperation::firebaseData, operation_path)) {
         // Get path to update
-        String operation_path = "/" + firebase_id;
         operation_path += "/content/actions/";
-        operation_path += (char) (operation_idx + 48); // Transform idx to char and append value to the path
-        operation_path += "/status";
+        operation_path += String(operation_idx); // Transform idx to char and append value to the path
+
+        // Update end timestamp
+        Firebase.setTimestamp(firebaseData, operation_path + "/endTime");
 
         // Update status
-        Firebase.setInt(firebaseData, operation_path, 1);
+        Firebase.setInt(firebaseData, operation_path + "/status", 1);
 
     } else {
         Serial.print("[ERROR] FireBase path does not exist: ");
@@ -80,18 +81,63 @@ void FirebaseOperation::setOperationAsFailed(String firebase_id, int operation_i
 
     if (Firebase.pathExist(FirebaseOperation::firebaseData, operation_path)) {
         // Get path to update
-        String operation_path = "/" + firebase_id;
         operation_path += "/content/actions/";
-        operation_path += (char) (operation_idx + 48); // Transform idx to char and append value to the path
-        operation_path += "/status";
+        operation_path += String(operation_idx); // Transform idx to char and append value to the path
+
+        // Update end timestamp
+        Firebase.setTimestamp(firebaseData, operation_path + "/endTime");
 
         // Update status
-        Firebase.setInt(firebaseData, operation_path, 2);
+        Firebase.setInt(firebaseData, operation_path + "/status", 2);
 
     } else {
         Serial.print("[ERROR] FireBase path does not exist: ");
         Serial.println(firebase_id);
     }
+
+}
+
+void FirebaseOperation::setTimestampStart(String firebase_id, int operation_idx) {
+
+    String operation_path = "/" + firebase_id;
+
+    if (Firebase.pathExist(FirebaseOperation::firebaseData, operation_path)) {
+
+        operation_path += "/content/actions/";
+        operation_path += String(operation_idx); // Transform idx to char and append value to the path
+
+        // Update start timestamp
+        Firebase.setTimestamp(firebaseData, operation_path + "/startTime");
+
+    } else {
+        Serial.print("[ERROR] FireBase path does not exist: ");
+        Serial.println(firebase_id);
+    }
+
+}
+
+
+int FirebaseOperation::getParamByName(String firebase_id, String param_name) {
+
+    String parameter_path = "/" + firebase_id;
+    parameter_path += "/content/parameters/";
+
+    // Default to 0
+    int parameter = 0;
+
+    if (Firebase.getInt(firebaseData, parameter_path + param_name)) {
+
+        if (firebaseData.dataType() == "int") {
+            parameter = firebaseData.intData();
+        } else {
+            Serial.println("[ERROR] {Firebase} Operation parameter parameter invalid data type");
+        }
+    } else {
+        Serial.print("[ERROR] {FireBase} Operation parameter does not exist: ");
+        Serial.println(param_name);
+    }
+
+    return parameter;
 
 }
 
@@ -111,7 +157,7 @@ void FirebaseOperation::uploadSequence(const Sequence& seq, const char *seq_name
         // Name of the instrument: [R]
         String operation_name = String("[") + seq.names_list[i] + "]";
         // Operation
-        operation_name += String(" ") + seq.callbacks_list[i].second;
+        operation_name += String(" ") + seq.operations_list[i].c_str();
         // If operation ends with X, replace it with the operation value (delay X -> delay 2)
         if (operation_name.endsWith("X")) {
             // Remove X
@@ -131,3 +177,5 @@ void FirebaseOperation::uploadSequence(const Sequence& seq, const char *seq_name
     Firebase.updateNode(firebaseData, firebasePath, json);
 
 }
+
+

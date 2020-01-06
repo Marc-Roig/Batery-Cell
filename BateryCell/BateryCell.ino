@@ -16,6 +16,40 @@ void initialize_instruments() {
     Sequence::setNewInstrument("SleepMinutes", -1);
 }
 
+
+void initialize_operations() {
+
+    // Valve
+    Sequence::setNewOperation("OPEN_VALVE", ValveOperations::open);
+    Sequence::setNewOperation("CLOSE_VALVE", ValveOperations::close);
+
+    // Revolver
+    Sequence::setNewOperation("REVOLVER_ENABLE", RevolverOperations::enable);
+    Sequence::setNewOperation("REVOLVER_DISABLE", RevolverOperations::disable);
+    Sequence::setNewOperation("REVOLVER_ROTATE_TO_NEXT", RevolverOperations::rotateToNext);
+    Sequence::setNewOperation("REVOLVER_ROTATE_ABSOLUTE", RevolverOperations::rotateAbsolute);
+    Sequence::setNewOperation("REVOLVER_ROTATE_TO_PREVIOUS", RevolverOperations::rotateToPrevious);
+
+    // Pump
+    Sequence::setNewOperation("PUMP_SET_SPEED", PumpOperations::setSpeed);
+
+    // Motor Stirrer
+    Sequence::setNewOperation("MOTOR_STIRRER_SET_SPEED", MotorStirrerOperations::setSpeed);
+
+    // WebSocket
+    Sequence::setNewOperation("WS_START_EXPERIMENT", WebsocketOperation::startExperiment);
+    Sequence::setNewOperation("WS_START_MEASUREMENTS", WebsocketOperation::startMeasurements);
+    Sequence::setNewOperation("WS_STOP_EXPERIMENT", WebsocketOperation::stopExperiment);
+    Sequence::setNewOperation("WS_STOP_MEASUREMENTS", WebsocketOperation::stopMeasurements);
+    Sequence::setNewOperation("WS_END_OF_SEQUENCE", WebsocketOperation::endOfSequence);
+    Sequence::setNewOperation("WS_DEBUG_END_OF_OPERATION", WebsocketOperationTest::endOfOperation);
+
+    // Delays
+    Sequence::setNewOperation("TIME_DELAY_MS", SleepOperation::sleep);
+    Sequence::setNewOperation("TIME_DELAY_MINUTES", SleepOperation::sleepMinutes);
+}
+
+
 void setup() {
 
     // Serial initialization for console debugging
@@ -24,6 +58,7 @@ void setup() {
 
     // Name all instruments used
     initialize_instruments();
+    initialize_operations();
 
     // Initialize core 0 main thread (Current is in core 1) and any queue / signal for
     // internal communication between cores
@@ -35,13 +70,15 @@ void setup() {
     // Wait time to let everything run
     delay(500);
 
-//    test();
-
+    #ifdef TEST_FLAG
+    test();
+    #endif
 }
 
 
 void loop() {
 
+    #ifndef TEST_FLAG
     // Receive the commands from server
     if (wsQueueStartSequence != 0) {
         WSMessage wsMessage;
@@ -64,5 +101,5 @@ void loop() {
             Serial.println("[ERROR] Failed to Receive QueueStartSequence message");
         }
     }
-
+    #endif
 }
