@@ -23,7 +23,7 @@ public:
     static int getParamByName(String param_name);
 
     // Sequences
-    static void uploadSequence(const Sequence& seq, const char *seq_name);
+    static void uploadSequence(const char *seq_name);
 
     // Instruments
     static void updateRevolverSlot(int currentSlot);

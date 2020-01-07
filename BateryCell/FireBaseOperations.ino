@@ -143,41 +143,60 @@ int FirebaseOperation::getParamByName(String param_name) {
 }
 
 
-void FirebaseOperation::uploadSequence(const Sequence& seq, const char *seq_name) {
+void FirebaseOperation::uploadSequence(const char *seq_name) {
 
     FirebaseJson json;
+    FirebaseJson esp32_param_json;
+
     FirebaseJsonArray arr;
 
-    String firebasePath = String("sequences/") + seq_name;
+    if (sequences.count(seq_name)) {
 
-    Serial.println("[INFO] Uploading sequence to firebase: ");
+        Sequence seq = sequences[seq_name];
 
-    // Iterate over sequence to get the operation names
-    for (int i = 0; i < seq.size(); i++) {
+        String firebasePath = String("sequences/") + seq_name;
 
-        // Name of the instrument: [R]
-        String operation_name = String("[") + seq.names_list[i] + "]";
-        // Operation
-        operation_name += String(" ") + seq.operations_list[i];
-        // If operation ends with X, replace it with the operation value (delay X -> delay 2)
-        if (operation_name.endsWith("X")) {
-            // Remove X
-            operation_name.remove(operation_name.length() - 1, 1);
-            operation_name.concat(seq.msgs_list[i]);
+        Serial.println("[INFO] Uploading sequence to firebase: ");
+
+        // Iterate over sequence to get the operation names
+        for (int i = 0; i < seq.size(); i++) {
+
+            FirebaseJson operation_json;
+
+            // Instrument
+            operation_json.add("instrument", seq.names_list[i]);
+
+            // Operation
+            operation_json.add("name", seq.operations_list[i]);
+
+            // FireBase param
+            if (seq.fb_param_list[i] != nullptr) {
+                operation_json.add("fb_param", seq.fb_param_list[i]);
+                esp32_param_json.add(seq.fb_param_list[i] /*parameter name*/, 0 /*default value*/);
+            }
+
+            arr.add(operation_json);
+
         }
-        arr.add(operation_name);
 
+        json.add("operations", arr);
+
+        String jsonStr;
+        json.toString(jsonStr, true);
+        Serial.println(jsonStr);
+
+        Firebase.updateNode(firebaseData, firebasePath, json);
+        if (!Firebase.updateNode(firebaseData, firebasePath + "/parameters/microcontroller", esp32_param_json)) {
+            Serial.println("[ERROR] Can not create sequence parameters");
+        }
+
+    } else {
+        Serial.print("[ERROR] Could not upload sequence to firebase. Seq name does not exist: ");
+        Serial.println(seq_name);
     }
 
-    json.add("operations", arr);
-
-    String jsonStr;
-    json.toString(jsonStr, true);
-    Serial.println(jsonStr);
-
-    Firebase.updateNode(firebaseData, firebasePath, json);
-
 }
+
 
 // Instruments
 void FirebaseOperation::updateRevolverSlot(int currentSlot) {
@@ -188,15 +207,13 @@ void FirebaseOperation::updateRevolverSlot(int currentSlot) {
 
 }
 
+
 void FirebaseOperation::pushEppendorfFilled(int currentSlot) {
 
     String parameter_path = "/" + FirebaseOperation::firebaseId;
     parameter_path += "/content";
 
     // If eppendorfs array was previously declared, push value into it
-//    if (Firebase.pathExist(firebaseData, parameter_path + "/eppendorfs_filled")) {
-//
-//    }
     if (Firebase.get(firebaseData, parameter_path + "/eppendorfs_filled")) {
         if (firebaseData.dataType() == "array") {
 

@@ -83,6 +83,7 @@ void create_clean_sequence() {
             .add("R", "FB_ADD_EPPENDORF_FILLED")
             .add("R", "REVOLVER_ROTATE_TO_NEXT")
             .add("R", "FB_ADD_EPPENDORF_FILLED")
+            .addDelayFbParam("pump_time_until_full")
             .add("R", "REVOLVER_ROTATE_TO_PREVIOUS")
             .add("R", "REVOLVER_DISABLE")
             .add("V5", "OPEN_VALVE")
@@ -161,11 +162,12 @@ void testReceiveStartSequence() {
 void test() {
 
     // -- Test instruments
-    testReceiveStartSequence();
+//    testReceiveStartSequence();
+
 
     // -- Upload sequence to firebase
-//    const Sequence seq =  sequences["clean_operation"];
-//    FirebaseOperation::uploadSequence(seq, "clean_operation");
+    create_clean_sequence();
+    FirebaseOperation::uploadSequence("clean_operation");
 //
 //    // -- Test sending WS Message
 //    Serial.println("[TEST] Sequence WS start experiment");
