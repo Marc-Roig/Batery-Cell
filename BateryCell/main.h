@@ -32,8 +32,6 @@
 #include "FirebaseOperations.h"
 
 // Other
-#include "HelperDefines.h"
-
 #include "Core0.h"
 
 #include "ExperimentSequences.h"

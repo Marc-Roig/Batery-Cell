@@ -117,6 +117,7 @@ void Revolver::rotate(int n_slots) {
 
     }
 
+
 }
 
 void Revolver::rotateToNext(uint n_slots) {
@@ -130,15 +131,15 @@ void Revolver::rotateToNext(uint n_slots) {
     #endif
 
     rotate(1);
-
     setCurrentSlot(currentSlot + 1);
+    // Update current slot to firebase
+    FirebaseOperation::updateRevolverSlot(currentSlot);
+
     // DEBUG
     #ifdef DEBUG_REVOLVER_FLAG
     Serial.print(", Updated Slot Position: ");
     Serial.println(currentSlot);
     #endif
-
-    // @TODO: Update to FireBase
 
 }
 
@@ -153,8 +154,9 @@ void Revolver::rotateToPrevious(uint n_slots) {
     #endif
 
     rotate(-1);
-
     setCurrentSlot(currentSlot - 1);
+    // Update current slot to firebase
+    FirebaseOperation::updateRevolverSlot(currentSlot);
 
     // DEBUG
     #ifdef DEBUG_REVOLVER_FLAG
@@ -162,7 +164,6 @@ void Revolver::rotateToPrevious(uint n_slots) {
     Serial.println(currentSlot);
     #endif
 
-    // @TODO: Update to FireBase
 
 }
 
@@ -186,6 +187,8 @@ void Revolver::rotateAbsolute(uint slot) {
     rotate(slotsToMove);
     // Update slot value
     setCurrentSlot(slot);
+    // Update current slot to firebase
+    FirebaseOperation::updateRevolverSlot(currentSlot);
 
     // DEBUG
     #ifdef DEBUG_REVOLVER_FLAG

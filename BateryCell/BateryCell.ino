@@ -56,7 +56,7 @@ void setup() {
     Serial.begin(115200);
     Serial.println("START...");
 
-    // Name all instruments used
+    // Name all instruments used. 
     initialize_instruments();
     initialize_operations();
 
@@ -92,7 +92,7 @@ void loop() {
 
             // Set sequence fireBase id to update operations status
             String exp_id = String(wsMessage.type);
-            sequence.setFireBaseId(exp_id);
+            FirebaseOperation::firebaseId = exp_id;
 
             // Execute sequence
             sequence.executeAll();

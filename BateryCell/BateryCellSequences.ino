@@ -11,6 +11,7 @@ Sequence buildSequenceEppendorfFill() {
             .addDelay(EPENDORF_FILL_TIME)
             .add("V5", "CLOSE_VALVE")
             .add("V6", "CLOSE_VALVE")
+//            .add("R", "FB_ADD_EPPENDORF_FILLED")
             .addDelay(1000);
 
     return seqFillNextEppendorf;

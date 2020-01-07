@@ -2,6 +2,7 @@
 
 
 FirebaseData FirebaseOperation::firebaseData;
+String FirebaseOperation::firebaseId = "";
 
 void FirebaseOperation::initFirebase() {
 
@@ -17,13 +18,13 @@ void FirebaseOperation::initFirebase() {
 }
 
 
-void FirebaseOperation::setOperationAsPending(String firebase_id, int operation_idx) {
+void FirebaseOperation::setOperationAsPending(int operation_idx) {
 
     // When starting a sequence, set the workingSequence name
     // Each time an operation ends this function is called and specified the operation idx in the sequence
     // to update.
 
-    String operation_path = "/" + firebase_id;
+    String operation_path = "/" + FirebaseOperation::firebaseId;
 
     if (Firebase.pathExist(FirebaseOperation::firebaseData, operation_path)) {
         // Get path to update
@@ -38,19 +39,19 @@ void FirebaseOperation::setOperationAsPending(String firebase_id, int operation_
 
     } else {
         Serial.print("[ERROR] FireBase path does not exist: ");
-        Serial.println(firebase_id);
+        Serial.println(FirebaseOperation::firebaseId);
     }
 
 }
 
 
-void FirebaseOperation::setOperationAsDone(String firebase_id, int operation_idx) {
+void FirebaseOperation::setOperationAsDone(int operation_idx) {
 
     // When starting a sequence, set the workingSequence name
     // Each time an operation ends this function is called and specified the operation idx in the sequence
     // to update.
 
-    String operation_path = "/" + firebase_id;
+    String operation_path = "/" + FirebaseOperation::firebaseId;
 
     if (Firebase.pathExist(FirebaseOperation::firebaseData, operation_path)) {
         // Get path to update
@@ -65,19 +66,19 @@ void FirebaseOperation::setOperationAsDone(String firebase_id, int operation_idx
 
     } else {
         Serial.print("[ERROR] FireBase path does not exist: ");
-        Serial.println(firebase_id);
+        Serial.println(FirebaseOperation::firebaseId);
     }
 
 }
 
 
-void FirebaseOperation::setOperationAsFailed(String firebase_id, int operation_idx) {
+void FirebaseOperation::setOperationAsFailed(int operation_idx) {
 
     // When starting a sequence, set the workingSequence name
     // Each time an operation ends this function is called and specified the operation idx in the sequence
     // to update.
 
-    String operation_path = "/" + firebase_id;
+    String operation_path = "/" + FirebaseOperation::firebaseId;
 
     if (Firebase.pathExist(FirebaseOperation::firebaseData, operation_path)) {
         // Get path to update
@@ -92,14 +93,14 @@ void FirebaseOperation::setOperationAsFailed(String firebase_id, int operation_i
 
     } else {
         Serial.print("[ERROR] FireBase path does not exist: ");
-        Serial.println(firebase_id);
+        Serial.println(FirebaseOperation::firebaseId);
     }
 
 }
 
-void FirebaseOperation::setTimestampStart(String firebase_id, int operation_idx) {
+void FirebaseOperation::setTimestampStart(int operation_idx) {
 
-    String operation_path = "/" + firebase_id;
+    String operation_path = "/" + FirebaseOperation::firebaseId;
 
     if (Firebase.pathExist(FirebaseOperation::firebaseData, operation_path)) {
 
@@ -111,15 +112,15 @@ void FirebaseOperation::setTimestampStart(String firebase_id, int operation_idx)
 
     } else {
         Serial.print("[ERROR] FireBase path does not exist: ");
-        Serial.println(firebase_id);
+        Serial.println(FirebaseOperation::firebaseId);
     }
 
 }
 
 
-int FirebaseOperation::getParamByName(String firebase_id, String param_name) {
+int FirebaseOperation::getParamByName(String param_name) {
 
-    String parameter_path = "/" + firebase_id;
+    String parameter_path = "/" + FirebaseOperation::firebaseId;
     parameter_path += "/content/parameters/";
 
     // Default to 0
@@ -178,4 +179,11 @@ void FirebaseOperation::uploadSequence(const Sequence& seq, const char *seq_name
 
 }
 
+// Instruments
+void FirebaseOperation::updateRevolverSlot(int currentSlot) {
 
+    String firebasePath = "hardware/content/eppendorf_idx";
+    if (!Firebase.setInt(firebaseData, firebasePath, currentSlot))
+        Serial.println("[ERROR] Could not sed eppendorf idx in firebase hardware document");
+
+}

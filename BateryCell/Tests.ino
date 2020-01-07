@@ -79,7 +79,7 @@ void create_clean_sequence() {
 
     cleanSeq.add("R", "REVOLVER_ENABLE")
             .add("R", "REVOLVER_ROTATE_TO_NEXT")
-            .addFbParam("R", "REVOLVER_ROTATE_ABSOLUTE", "voltage" /*FireBase param name*/)
+            .addFbParam("R", "REVOLVER_ROTATE_ABSOLUTE", "revolver_zero" /*FireBase param name*/)
             .add("R", "REVOLVER_ROTATE_TO_NEXT")
             .add("R", "REVOLVER_ROTATE_TO_PREVIOUS")
             .add("R", "REVOLVER_DISABLE")
@@ -89,17 +89,6 @@ void create_clean_sequence() {
             .add("P", "PUMP_SET_SPEED", PUMP_MAX_SPEED)
             .add("P", "PUMP_SET_SPEED", PUMP_STOP);
 
-    //    cleanSeq.add("R", REVOLVER_ENABLE)
-//            .add("R", REVOLVER_ROTATE_TO_NEXT)
-//            .addFbParam("R", REVOLVER_ROTATE_ABSOLUTE, "voltage")
-//            .add("R", REVOLVER_ROTATE_TO_NEXT)
-//            .add("R", REVOLVER_ROTATE_TO_PREVIOUS)
-//            .add("R", REVOLVER_DISABLE)
-//            .add("V5", OPEN_VALVE)
-//            .add("V5", CLOSE_VALVE)
-//            .addDelay(100)
-//            .add("P", PUMP_SET_SPEED, PUMP_MAX_SPEED)
-//            .add("P", PUMP_SET_SPEED, PUMP_STOP);
     storeNewSequence(cleanSeq, "clean_operation");
 }
 
@@ -149,12 +138,13 @@ void testReceiveStartSequence() {
             Serial.println(wsMessage.type);
             Serial.println("[TEST] Execute sequence");
 
+
             // Get sequence from it's name
             Sequence sequence = sequences[wsMessage.content];
 
             // Set sequence fireBase id to update operations status
             String exp_id = String(wsMessage.type);
-            sequence.setFireBaseId(exp_id);
+            FirebaseOperation::firebaseId = exp_id;
 
             // Execute sequence
             sequence.executeAll();

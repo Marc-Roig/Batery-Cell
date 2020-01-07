@@ -8,11 +8,10 @@ std::map<std::string, Operation_t> Sequence::callbacks;
 Sequence::Sequence(const Sequence& seq) {
 
     // Copy all elements of one sequence to this one
-    for (int i = 0; i < seq.size(); i++ )
-        this->pushOperationParams(seq.names_list[i], seq.operations_list[i], seq.msgs_list[i]);
-
-    this->parameters = seq.parameters;
-    this->sequence_idx = seq.sequence_idx;
+    names_list = seq.names_list;
+    operations_list = seq.operations_list;
+    msgs_list = seq.msgs_list;
+    fb_param_list = seq.fb_param_list;
 
 }
 
@@ -27,11 +26,8 @@ Sequence& Sequence::add(const char* instrument, const char* operation_name, int 
 
 Sequence& Sequence::addFbParam(const char *instrument, const char* operation_name, const char *firebase_param){
 
-    if (!this->pushOperationParams(instrument, operation_name, -1))
+    if (!this->pushOperationParams(instrument, operation_name, -1, firebase_param))
         throw ("Could not set operations sequence");
-
-    // Assign parameter name in the current sequence idx
-    parameters[this->size() - 1] = firebase_param;
 
     return *this;
 
@@ -40,20 +36,9 @@ Sequence& Sequence::addFbParam(const char *instrument, const char* operation_nam
 
 Sequence& Sequence::add(const Sequence& seq) {
 
+
     for (int i = 0; i < seq.size(); i++ )
-        this->pushOperationParams(seq.names_list[i], seq.operations_list[i], seq.msgs_list[i]);
-
-    this->parameters = seq.parameters;
-
-    return *this;
-
-}
-
-// TODO: Remove
-Sequence& Sequence::update(const int& sequence_idx, Operation_t callback, int msg=0) {
-
-//    callbacks_list[sequence_idx] = callback;
-    msgs_list[sequence_idx] = msg;
+        this->pushOperationParams(seq.names_list[i], seq.operations_list[i], seq.msgs_list[i], fb_param_list[i]);
 
     return *this;
 
@@ -72,13 +57,8 @@ Sequence &Sequence::update(const int &sequence_idx, const char *operation_name, 
 
 Sequence& Sequence::addDelay(int ms) {
 
-    if (Sequence::instruments.count("Sleep") > 0) {
-
-        names_list.push_back("Sleep");
-        operations_list.push_back("TIME_DELAY_MS");
-        msgs_list.push_back(ms);
-
-    }
+    if (Sequence::instruments.count("Sleep") > 0)
+        this->pushOperationParams("Sleep", "TIME_DELAY_MS", ms);
 
     return *this;
 
@@ -87,22 +67,10 @@ Sequence& Sequence::addDelay(int ms) {
 
 Sequence& Sequence::addDelayMinutes(int min) {
 
-    if (Sequence::instruments.count("SleepMinutes") > 0) {
-
-        names_list.push_back("SleepMinutes");
-        operations_list.push_back("TIME_DELAY_MINUTES");
-        msgs_list.push_back(min);
-
-    }
+    if (Sequence::instruments.count("SleepMinutes") > 0)
+        this->pushOperationParams("SleepMinutes", "TIME_DELAY_MINUTES", min);
 
     return *this;
-
-}
-
-
-void Sequence::setFireBaseId(const String _fireBaseId) {
-
-    fireBaseId = _fireBaseId;
 
 }
 
@@ -120,27 +88,29 @@ int Sequence::execute(int idx) {
     if (instruments.count(names_list[idx]) > 0) {
 
         // Get instrument variant
-        InstrumentVariant& instrumentVariant = instruments.at(names_list[idx]);
+        InstrumentVariant &instrumentVariant = instruments.at(names_list[idx]);
 
+        // Get operation parameter
         int param = this->getParameter(idx);
         if (param != -1) {
 
             // Set start of operation timestamp
-            FirebaseOperation::setTimestampStart(fireBaseId, idx);
+            FirebaseOperation::setTimestampStart(idx);
 
             // Call callback function
             auto callback = this->getCallback(idx);
             callback(instrumentVariant, param);
 
             // Update fireBase experiment document
-            FirebaseOperation::setOperationAsDone(fireBaseId, idx);
+            FirebaseOperation::setOperationAsDone(idx);
 
             return -1;
         }
 
     }
-
-    FirebaseOperation::setOperationAsFailed(fireBaseId, idx);
+    Serial.print("[ERROR] Operation failed: ");
+    Serial.println(idx);
+    FirebaseOperation::setOperationAsFailed(idx);
     return idx;
 
 }
@@ -188,6 +158,7 @@ String Sequence::list() {
 
 }
 
+
 Sequence::callback_t Sequence::getCallback(int idx) {
 
 
@@ -196,36 +167,36 @@ Sequence::callback_t Sequence::getCallback(int idx) {
 
 }
 
+
 int Sequence::getParameter(int idx) {
 
     // Get parameter
-    int param = msgs_list[idx];
+    int param ;
+    const char *parameter_name = fb_param_list[idx];
 
-    // If we need to extract parameter from fireBase
-    if (param == -1) {
-        if (parameters.count(idx)) {
-            String param_name = parameters.at(idx);
-            param = FirebaseOperation::getParamByName(fireBaseId, param_name);
-        } else {
-            Serial.println("[ERROR] operation idx does not have any firebase parameter associated");
-            return -1;
-        }
+    // If there is a firebase param
+    if (parameter_name != nullptr) {
+        param = FirebaseOperation::getParamByName(parameter_name);
+    } else {
+        param = msgs_list[idx];
     }
 
     return param;
 
 }
 
-int Sequence::pushOperationParams(const char *instrument, const char *operation_name, int operation_value) {
+
+int Sequence::pushOperationParams(const char *instrument, const char *operation_name, int operation_value /* =0 */,
+                                  const char *fb_param /* =nullptr */) {
 
     // Check instrument and operation are defined
     if (Sequence::instruments.count(instrument)) {
-
         if (Sequence::callbacks.count(operation_name)) {
             names_list.push_back(instrument);
             operations_list.push_back(operation_name);
             msgs_list.push_back(operation_value);
-            return 0;
+            fb_param_list.push_back(fb_param);
+            return 1;
         } else {
             Serial.print("[ERROR] Operation name was not defined: ");
             Serial.println(operation_name);
@@ -236,7 +207,7 @@ int Sequence::pushOperationParams(const char *instrument, const char *operation_
         Serial.println(instrument);
     }
 
-    return -1;
+    return 0;
 }
 
 
@@ -258,13 +229,10 @@ void Sequence::setNewOperation(std::string operation_name, Operation_t operation
 Sequence& Sequence::operator=(const Sequence& seq) {
 
     // Copy all elements of one sequence to this one
-    for (int i = 0; i < seq.size(); i++ ) {
-
-        names_list.push_back(seq.names_list[i]);
-        operations_list.push_back(seq.operations_list[i]);
-        msgs_list.push_back(seq.msgs_list[i]);
-
-    }
+    names_list = seq.names_list;
+    operations_list = seq.operations_list;
+    msgs_list = seq.msgs_list;
+    fb_param_list = seq.fb_param_list;
 
     return *this;
 }

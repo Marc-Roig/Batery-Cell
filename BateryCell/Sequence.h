@@ -29,14 +29,10 @@ public:
     // Map operation name with the callback
     static std::map<std::string, Operation_t> callbacks;
 
-    // Map parameter name with idx of operation in the sequence
-    std::map<int, String> parameters;
-
     std::vector<const char*> names_list;    // instrument names
     std::vector<const char*> operations_list; // operation callbacks
-    std::vector<int> msgs_list; // content to send to each operation callback
-
-    String fireBaseId = ""; // Needed to update sequence status in fireBase
+    std::vector<int> msgs_list; // content to send to each operation callback (optional)
+    std::vector<const char*> fb_param_list; // name of the firebase param to retrieve. It overrides the previous (optional)
 
     int sequence_idx = 0;
 
@@ -56,9 +52,6 @@ public:
     Sequence& add(const Sequence& seq);
 
     // Update element of the sequence
-    Sequence& update(const int& sequence_idx, Operation_t callback, int msg);
-
-    // Update element of the sequence
     Sequence &update(const int &sequence_idx, const char *operation_name, int operation_value = 0);
 
     // Add ms delay in the sequence
@@ -72,9 +65,6 @@ public:
 
     // Add min delay in the sequence
     Sequence& addDelayMinutes(int min);
-
-    // Set fireBase ID to update operations status
-    void setFireBaseId(const String _fireBaseId);
 
     // Execute operation from sequence located at position idx
     int execute(int idx);
@@ -97,7 +87,7 @@ public:
     int getParameter(int idx); // Get operation parameter
 
     // Insert operation instrument name, callback name and param
-    int pushOperationParams(const char* instrument, const char* operation_name, int operation_value);
+    int pushOperationParams(const char* instrument, const char* operation_name, int operation_value=0, const char* fb_param=nullptr);
 
     // ---------------------------------------- //
     // -- Instrument - Operation definitions -- //
