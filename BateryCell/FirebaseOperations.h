@@ -27,6 +27,7 @@ public:
 
     // Instruments
     static void updateRevolverSlot(int currentSlot);
+    static void pushEppendorfFilled(int currentSlot);
 
 };
 #endif //BATERY_CELL_FIREBASEOPERATIONS_H

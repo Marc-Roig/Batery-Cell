@@ -187,3 +187,39 @@ void FirebaseOperation::updateRevolverSlot(int currentSlot) {
         Serial.println("[ERROR] Could not sed eppendorf idx in firebase hardware document");
 
 }
+
+void FirebaseOperation::pushEppendorfFilled(int currentSlot) {
+
+    String parameter_path = "/" + FirebaseOperation::firebaseId;
+    parameter_path += "/content";
+
+    // If eppendorfs array was previously declared, push value into it
+//    if (Firebase.pathExist(firebaseData, parameter_path + "/eppendorfs_filled")) {
+//
+//    }
+    if (Firebase.get(firebaseData, parameter_path + "/eppendorfs_filled")) {
+        if (firebaseData.dataType() == "array") {
+
+            FirebaseJsonArray &arr = firebaseData.jsonArray();
+            arr.add(currentSlot);
+
+            if (!Firebase.setArray(firebaseData, parameter_path + "/eppendorfs_filled", arr)) {
+                Serial.println("[ERROR] Could not set filled eppendorf");
+                Serial.println("REASON: " + firebaseData.errorReason());
+            }
+
+            return;
+        }
+    }
+
+    // If it was not, create a new array
+    Serial.println("b");
+    FirebaseJsonArray arr;
+    arr.add(currentSlot);
+    if (!Firebase.setArray(firebaseData, parameter_path + "/eppendorfs_filled", arr)) {
+        Serial.println("[ERROR] Could not set filled eppendorf");
+        Serial.println("REASON: " + firebaseData.errorReason());
+    }
+
+
+}

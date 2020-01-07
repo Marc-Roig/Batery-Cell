@@ -60,11 +60,11 @@ public:
     // Add ms delay in the sequence and retrieve value from fireBase
     Sequence& addDelayFbParam(const char* firebase_param);
 
-    // Add min delay in the sequence and retrieve value from fireBase
-    Sequence& addDelayMinutesFbParam(int min);
-
     // Add min delay in the sequence
     Sequence& addDelayMinutes(int min);
+
+    // Add min delay in the sequence and retrieve value from fireBase
+    Sequence& addDelayMinutesFbParam(const char* firebase_param);
 
     // Execute operation from sequence located at position idx
     int execute(int idx);

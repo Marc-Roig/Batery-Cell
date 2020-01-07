@@ -65,12 +65,16 @@ public:
     static Operation_t rotateAbsolute;
     static Operation_t rotateToNext;
     static Operation_t rotateToPrevious;
+    static Operation_t fbAddFilledEppendorf;
 
     static void _enable(InstrumentVariant& _revolver, int msg);
     static void _disable(InstrumentVariant& _revolver, int msg);
+
     static void _rotateAbsolute(InstrumentVariant& _revolver, int n_slot);
     static void _rotateToNext(InstrumentVariant& _revolver, int n_slot);
     static void _rotateToPrevious(InstrumentVariant& _revolver, int n_slot);
+
+    static void _fbAddFilledEppendorf(InstrumentVariant& _revolver, int msg);
 
 };
 

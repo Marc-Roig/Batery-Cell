@@ -41,6 +41,7 @@ Operation_t RevolverOperations::disable          { RevolverOperations::_disable 
 Operation_t RevolverOperations::rotateAbsolute   { RevolverOperations::_rotateAbsolute   , "Rotate Revolver: X"     };
 Operation_t RevolverOperations::rotateToNext     { RevolverOperations::_rotateToNext     , "Rotate Revolver to next"};
 Operation_t RevolverOperations::rotateToPrevious { RevolverOperations::_rotateToPrevious , "Rotate Revolver to next"};
+Operation_t RevolverOperations::fbAddFilledEppendorf { RevolverOperations::_fbAddFilledEppendorf , "Update eppendorfs filled in firebase"};
 
 
 void RevolverOperations::_enable(InstrumentVariant& _revolver, int msg) {
@@ -108,6 +109,21 @@ void RevolverOperations::_rotateToPrevious(InstrumentVariant& _revolver, int n_s
 
 }
 
+
+void RevolverOperations::_fbAddFilledEppendorf(InstrumentVariant& _revolver, int msg) {
+
+    // Check if variant is actually holding a Revolver type
+    if (!_revolver.is<Revolver>()) throw ("INCORRECT VARIANT TYPE, EXPECTED REVOLVER TYPE");
+
+    // Transform variant into a Revolver variable
+    Revolver& revolver = _revolver.as_revolver;
+
+    // Rotate revolver
+    int currentSlot = revolver.getCurrentSlot();
+    FirebaseOperation::pushEppendorfFilled(currentSlot);
+
+}
+
 // -- PUMP -- //
 Operation_t PumpOperations::setSpeed { PumpOperations::_setSpeed, "Set Pump speed: X"};
 
@@ -133,7 +149,7 @@ void MotorStirrerOperations::_setSpeed(InstrumentVariant& _motorStirrer, int spe
 
     // Check if variant is actually holding a Revolver type
     if (!_motorStirrer.is<MotorStirrer>()) {
-        throw ("INCORRECT VARIANT TYPE, EXPECTED MOTORSTIRRER TYPE");
+        throw ("INCORRECT VARIANT TYPE, EXPECTED MOTOR STIRRER TYPE");
     }
 
     // Transform variant into a Revolver variable

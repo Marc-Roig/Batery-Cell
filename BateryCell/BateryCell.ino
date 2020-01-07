@@ -29,6 +29,7 @@ void initialize_operations() {
     Sequence::setNewOperation("REVOLVER_ROTATE_TO_NEXT", RevolverOperations::rotateToNext);
     Sequence::setNewOperation("REVOLVER_ROTATE_ABSOLUTE", RevolverOperations::rotateAbsolute);
     Sequence::setNewOperation("REVOLVER_ROTATE_TO_PREVIOUS", RevolverOperations::rotateToPrevious);
+    Sequence::setNewOperation("FB_ADD_EPPENDORF_FILLED", RevolverOperations::fbAddFilledEppendorf);
 
     // Pump
     Sequence::setNewOperation("PUMP_SET_SPEED", PumpOperations::setSpeed);

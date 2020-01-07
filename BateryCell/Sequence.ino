@@ -64,11 +64,30 @@ Sequence& Sequence::addDelay(int ms) {
 
 }
 
+Sequence& Sequence::addDelayFbParam(const char* firebase_param) {
+
+    if (!this->pushOperationParams("Sleep", "TIME_DELAY_MS", -1, firebase_param))
+        throw ("Could not set operations sequence");
+
+    return *this;
+
+}
+
 
 Sequence& Sequence::addDelayMinutes(int min) {
 
-    if (Sequence::instruments.count("SleepMinutes") > 0)
-        this->pushOperationParams("SleepMinutes", "TIME_DELAY_MINUTES", min);
+    if (!this->pushOperationParams("SleepMinutes", "TIME_DELAY_MINUTES", min))
+        throw ("Could not set operations sequence");
+
+    return *this;
+
+}
+
+
+Sequence& Sequence::addDelayMinutesFbParam(const char* firebase_param) {
+
+    if (!this->pushOperationParams("SleepMinutes", "TIME_DELAY_MINUTES", -1, firebase_param))
+        throw ("Could not set operations sequence");
 
     return *this;
 

@@ -66,6 +66,9 @@ public:
     void rotateAbsolute(uint slot);
 
 	void setCurrentSlot(int newSlot);
+
+	int getCurrentSlot() { return currentSlot; }
+
 };
 
 class Pump {
