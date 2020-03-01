@@ -1,16 +1,16 @@
 #include "main.h"
 
 void initialize_instruments() {
-    Sequence::setNewInstrument("MSc", MotorStirrer(5, 0));
-    Sequence::setNewInstrument("MSa", MotorStirrer(19, 0));
-    Sequence::setNewInstrument("V1", Valve(32, HIGH));
-    Sequence::setNewInstrument("V2", Valve(33, HIGH));
-    Sequence::setNewInstrument("V3", Valve(25, HIGH));
-    Sequence::setNewInstrument("V4", Valve(26, HIGH));
-    Sequence::setNewInstrument("V5", Valve(27, HIGH));
-    Sequence::setNewInstrument("V6", Valve(14, HIGH));
-    Sequence::setNewInstrument("P", Pump(12, -1));
-    Sequence::setNewInstrument("R", Revolver(/*Step pin*/ 18, /*Dir pin*/4, /*Enable pin*/2, /*N slots*/30, /*microsteps*/32));
+    Sequence::setNewInstrument("MSc", MotorStirrer(19, 0));
+    Sequence::setNewInstrument("MSa", MotorStirrer(21, 0));
+    Sequence::setNewInstrument("V1", Valve(13, LOW));
+    Sequence::setNewInstrument("V2", Valve(12, LOW));
+    Sequence::setNewInstrument("V3", Valve(14, LOW));
+    Sequence::setNewInstrument("V4", Valve(27, LOW));
+    Sequence::setNewInstrument("V5", Valve(26, LOW));
+    Sequence::setNewInstrument("V6", Valve(25, LOW));
+    Sequence::setNewInstrument("P", Pump(18, -1));
+    Sequence::setNewInstrument("R", Revolver(/*Step pin*/ 2, /*Dir pin*/15, /*Enable pin*/4, /*N slots*/30, /*microsteps*/32));
     Sequence::setNewInstrument("WebSocket", WebsocketInstrument());
     Sequence::setNewInstrument("Sleep", -1);
     Sequence::setNewInstrument("SleepMinutes", -1);

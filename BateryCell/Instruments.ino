@@ -15,7 +15,7 @@ void Valve::open() {
     Serial.println(pinValve);
     #endif
 
-    digitalWrite(pinValve, LOW);
+    digitalWrite(pinValve, HIGH);
 
 }
 
@@ -26,7 +26,7 @@ void Valve::close() {
     Serial.println(pinValve);
     #endif
 
-    digitalWrite(pinValve, HIGH);
+    digitalWrite(pinValve, LOW);
 
 }
 
@@ -231,7 +231,6 @@ void Pump::setSpeed(int speed) {
 
     if (speed == 0) {
         digitalWrite(pinA, LOW);
-
         #ifdef DEBUG_PUMP_FLAG
         Serial.print("[DEBUG] {Pump} Turning off Pump. PIN: ");
         Serial.println(pinA);

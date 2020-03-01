@@ -4,7 +4,7 @@ Necessary code to run experiment and measurements
 
 ## Set up
 
-You will need Python 3 (preferably 3.6.9) to run this code in Windows (currently not working on other platforms).
+You will need Python 3 (preferably 3.7) to run this code in Windows (currently not working on other platforms).
 
 Execute the following in this same directory:
 ```

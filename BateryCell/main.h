@@ -2,8 +2,7 @@
 #define MAIN_H
 
 // Uncoment if you want to test code (WIFI / Websocket are mocked)
-#define TEST_FLAG
-
+//#define TEST_FLAG
 
 #include "Credentials.h"
 

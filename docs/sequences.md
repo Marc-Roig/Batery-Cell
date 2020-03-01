@@ -38,7 +38,8 @@ Each sequence will be stored in firebase in the sequences keys:
                 }
             },
             "measurements": {
-                "variable": []
+                "variable_name_a": [],
+                "variable_name_b": []
             }
         }   
     }

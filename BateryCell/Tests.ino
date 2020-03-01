@@ -159,15 +159,38 @@ void testReceiveStartSequence() {
     }
 }
 
+void test_pins() {
+
+    Sequence pinSeq;
+
+    pinSeq.add("V1", "OPEN_VALVE")
+            .add("V2", "OPEN_VALVE")
+            .add("V3", "OPEN_VALVE")
+            .add("V4", "OPEN_VALVE")
+            .add("V5", "OPEN_VALVE")
+            .add("V6", "OPEN_VALVE")
+            .add("P", "PUMP_SET_SPEED", PUMP_MAX_SPEED)
+            .add("MSa", "MOTOR_STIRRER_SET_SPEED", MAGNETIC_STIRRER_HIGH_SPEED)
+            .add("MSc", "MOTOR_STIRRER_SET_SPEED", MAGNETIC_STIRRER_HIGH_SPEED)
+            .addDelay(5000)
+            .add("P", "PUMP_SET_SPEED", PUMP_STOP);
+
+    pinSeq.executeAll();
+
+}
+
+
 void test() {
 
     // -- Test instruments
 //    testReceiveStartSequence();
 
+    // -- Test Real output pins
+    test_pins();
 
     // -- Upload sequence to firebase
-    create_clean_sequence();
-    FirebaseOperation::uploadSequence("clean_operation");
+//    create_clean_sequence();
+//    FirebaseOperation::uploadSequence("clean_operation");
 //
 //    // -- Test sending WS Message
 //    Serial.println("[TEST] Sequence WS start experiment");
