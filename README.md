@@ -2,30 +2,7 @@
 
 This is a set of tools to automate the charging/discharging of a battery cell.
 
-We provide a set of tests to ensure everything works [TESTS.md](./TESTS.md)
-
-## Definitions
-
-#### Sequence
-
-#### Experiment
-
-#### Measurements
-
-
-## Installation
-
-TODO
-
-## Usage
-
-TODO
-
-## Contributing
-Pull requests are welcomed. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
+Set of tests to ensure everything works [TESTS.md](./TESTS.md)
 
 ## Authors and acknowledgment
 
